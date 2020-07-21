@@ -1,11 +1,11 @@
 body {
     padding: 0;
     margin: 0;
-  }
-  
-  .nav {
+}
+
+.nav {
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     background-color: #fff;
     border-bottom: solid;
     border-color: #dbdbdb;
@@ -13,27 +13,17 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-  }
-  
-  .home-page {
-    height: 30rem;
-    width: 100%;
-    background-color: #f5f5f5;
-  }
-  
-  .headerLogo {
+}
+
+.headerLogo {
     display: flex;
     align-items: center;
-  }
-  
-  .searchBox {
+}
+
+.searchBox {
     width: 10rem;
     height: 1.5rem;
     background-color: #fafafa;
     border: 1px solid #dbdbdb;
     border-radius: 3px;
-  }
-  
-  
-  
-  
+}

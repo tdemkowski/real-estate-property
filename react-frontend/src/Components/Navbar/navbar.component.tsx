@@ -7,9 +7,11 @@ const NavBar = () => {
         <div>
             <div className="nav">
                 <a className="headerLogo">
-                    <div className="headerLogo-Image">*logo*</div>
+                    <div className="headerLogo-Image">
+                        <img src="./logo.svg"/>
+                    </div>
                     <div className="headerLogo-Header">
-                        <h3 className="heading-logo">Instaclone</h3>
+                        <h3 className="heading-logo">Instagram</h3>
                     </div>
                 </a>
 
@@ -17,9 +19,8 @@ const NavBar = () => {
 
                 <div className="headerIcons">4x icons</div>
             </div>
-            <div className="home-page"></div>
         </div>
     )
 }
 
-export default NavBar;
+export default NavBar
