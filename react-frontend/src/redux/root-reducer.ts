@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 import { userReducer } from './user/user.reducer'
-import { User } from './user/user.models'
+import { UserState } from './user/user.models'
 
 export interface StoreState {
-    user: any;
+    user: UserState
 }
+
 const rootReducer = combineReducers<StoreState>({
     user: userReducer
 })
