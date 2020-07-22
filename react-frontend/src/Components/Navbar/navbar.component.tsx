@@ -14,7 +14,7 @@ const NavBar = () => {
             <div className="nav">
                 <div className="headerLogo">
                     <div className="headerLogo-Image">
-                        <img src={logo}/>
+                        <img alt="logo.png" src={logo}/>
                     </div>
                     <div className="headerLogo-Header">
                         <h3 className="heading-logo">Instagram</h3>
@@ -22,14 +22,14 @@ const NavBar = () => {
                 </div>
 
                 <div className="searchBox">
-                    <img src={search}/>
+                    <img alt="search.png" src={search}/>
                 </div>
 
                 <div className="headerIcons">
-                    <img src={compass}/>
-                    <img src={heart}/>
-                    <img src={user}/>
-                    <img src={camera}/>
+                    <img alt="compass.png" src={compass}/>
+                    <img alt="heart.png" src={heart}/>
+                    <img alt="user.png" src={user}/>
+                    <img alt="camera.png" src={camera}/>
                 </div>
             </div>
         </div>
