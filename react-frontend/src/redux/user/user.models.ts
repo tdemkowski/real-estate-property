@@ -3,3 +3,7 @@ export interface User {
     username: string,
     id: string
 }
+
+export interface UserState {
+    currentUser: User | null
+}
