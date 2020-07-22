@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
@@ -8,35 +8,31 @@ import SignIn from './Components/SignIn/signin.component'
 import SignUp from './Components/SignUp/signup.component'
 import Explore from './Components/Explore/explore.component'
 
+class App extends Component {
+    state = {
+        searching: false
+    }
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <NavBar/>
-            </header>
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/explore" component={Explore} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/sign-up" component={SignUp} />
-            </Switch>
-        </div>
-    )
+    searchTool = (event: any) => {
+        this.setState({searching: true})
+        setTimeout(() => this.setState({searching: false}), 2000)
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <NavBar searching={this.state.searching} search={this.searchTool} />
+                </header>
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/explore" component={Explore} />
+                    <Route path="/sign-in" component={SignIn} />
+                    <Route path="/sign-up" component={SignUp} />
+                </Switch>
+            </div>
+        )
+    }
 }
 
 export default App
-
-// render() {
-//     return (
-//       <div>
-//         <Header />
-//         <Switch>
-//           <Route exact path="/" component={HomePage} />
-//           <Route path="/shop" component={ShopPage} />
-//           <Route path="/signin" render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage />)} />
-//           <Route exact path="/checkout" component={CheckoutPage}/>
-//         </Switch>
-//       </div>
-//     );
-//   }
