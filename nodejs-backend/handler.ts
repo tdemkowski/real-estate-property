@@ -1,12 +1,16 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import 'source-map-support/register';
+import serverless from 'serverless-http';
+import express, { Request, Response } from 'express';
 
-export const hello: APIGatewayProxyHandler = async (event, _context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless Webpack (Typescript) v1.0! Your function executed successfully!',
-      input: event,
-    }, null, 2),
-  };
-}
+const app = express();
+
+
+app.get('/message', (req: Request, res: Response) => {
+  res.send({ message: 'This is message route' });
+});
+
+app.use((req: Request, res: Response) => {
+  res.send({ message: 'Server is running' });
+});
+
+export const hello: APIGatewayProxyHandler = serverless(app);
