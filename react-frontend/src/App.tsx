@@ -1,28 +1,39 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
 import NavBar from './Components/Navbar/navbar.component'
 import HomePage from './Pages/HomePage/homepage.component'
-import SignIn from './Components/SignIn/signin.component'
-import SignUp from './Components/SignUp/signup.component'
-import Explore from './Components/Explore/explore.component'
+import SignIn from './Pages/SignIn/signin.component'
+import SignUp from './Pages/SignUp/signup.component'
+import Explore from './Pages/Explore/explore.component'
 
 class App extends Component {
     state = {
-        searching: false
+        searching: false,
+        viewActivity: false
     }
 
-    searchTool = (event: any) => {
-        this.setState({searching: true})
-        setTimeout(() => this.setState({searching: false}), 2000)
+    searchTool = () => {
+        this.setState({ searching: true })
+        setTimeout(() => this.setState({ searching: false }), 2000)
+    }
+
+    viewActivitySwitch = () => {
+        this.setState({ viewActivity: !this.state.viewActivity })
     }
 
     render() {
         return (
             <div className="App">
                 <header className="App-header">
-                    <NavBar searching={this.state.searching} search={this.searchTool} />
+                    <NavBar
+                        searching={this.state.searching}
+                        search={this.searchTool}
+                        viewActivity={this.state.viewActivity}
+                        viewActivitySwitch={this.viewActivitySwitch}
+                        
+                    />
                 </header>
                 <Switch>
                     <Route exact path="/" component={HomePage} />

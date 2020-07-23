@@ -5,7 +5,7 @@ import './explore.styles.scss'
 const Explore = () => {
     return (
         <div>
-            <div className="explore">explore component</div>
+            <div className="explore">EXPLORE PAGE</div>
         </div>
     )
 }

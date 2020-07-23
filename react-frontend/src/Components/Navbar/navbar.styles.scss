@@ -21,6 +21,7 @@ body {
     width: 12rem;
     min-width: 12rem;
     height: 1.5rem;
+    margin-left: 3rem;
     background-color: #fafafa;
     border: 1px solid #dbdbdb;
     border-radius: 3px;
@@ -31,12 +32,12 @@ body {
 
 .headerIcons {
     display: flex;
-
+    width: 200px;
+    justify-content: space-evenly;
 }
 
 .icon {
     height: 1.5rem;
-    margin: 0.8rem;
 }
 
 .searchBox-icon {
@@ -50,7 +51,6 @@ body {
     font-family: "Leckerli One",sans-serif;
     color: #262626;
     font-size: 1.5rem;
-    margin: 0.8rem;
 }
 
 .searchBox-input {
@@ -69,5 +69,5 @@ body {
 .searchBox-spinner{
     height: 1.2rem;
     background: #fafafa;
-    margin: 0.3rem;
+    margin: 0.4rem;
 }
