@@ -4,6 +4,7 @@ import UserController from './controllers/user.controller';
 import { createConnection } from 'typeorm';
 import bodyParser = require('body-parser');
 import { Application } from 'express';
+import errorMiddleware from './middlewares/error.middleware';
 
 class App {
   public app: Application;
@@ -17,19 +18,25 @@ class App {
     this.connectToTheDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
+    // we must initialize error handling last!
+    this.initializeErrorHandling();
   }
  
-  private initializeMiddlewares() {
+  private initializeMiddlewares(): void {
     this.app.use(bodyParser.json());
   }
  
-  private initializeControllers(controllers) {
+  private initializeControllers(controllers): void {
     controllers.forEach((controller) => {
       this.app.use(this.basePath, controller.router);
     });
   }
+
+  private initializeErrorHandling(): void {
+    this.app.use(errorMiddleware);
+  }
  
-  public listen() {
+  public listen(): void {
     this.app.listen(this.port, () => {
       console.log(`App listening on the port ${this.port}`);
     });

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import UserService from '../services/user.service';
+import NotFoundException from './exceptions/NotFound.exception';
 class UserController {
     public path = '/user';
     public router = Router();
@@ -13,14 +14,14 @@ class UserController {
     }
 
 
-    getUserById = async (req, res) => {
+    getUserById = async (req, res, next) => {
         const userService = new UserService();
         const user = await userService.getUser(req.params.userId);
         console.log(user);
         if (user) {
             res.status(200).send(user);
         } else {
-            res.status(400).send();
+           next(new NotFoundException(req.params.userId));
         }
     }
 
