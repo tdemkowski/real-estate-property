@@ -16,7 +16,7 @@ class UserController {
 
     getUserById = async (req, res, next) => {
         const userService = new UserService();
-        const user = await userService.getUser(req.params.userId);
+        const user = await userService.FindOne(req.params.userId);
         console.log(user);
         if (user) {
             res.status(200).send(user);

@@ -1,12 +1,10 @@
-import { getConnection, Repository } from 'typeorm';
+import { getRepository } from 'typeorm';
 import { User } from '../entities/user.entity';
+import BaseService from './base.service';
 
-class UserService {
-    private userRepository: Repository<User> = getConnection().getRepository(User);
-    
-    public async getUser(id: string) {
-        const user = await this.userRepository.findOne(id);
-        return user;
+class UserService extends BaseService<User> {
+    constructor() {
+        super(getRepository(User));
     }
 }
 
