@@ -1,24 +1,28 @@
 import { Router } from 'express';
 import UserService from '../services/user.service';
+class UserController {
+    public path = '/user';
+    public router = Router();
 
-const router = Router();
-router.get('/user')
-
-router.get('/user/:userId', async (req, res) => {
-    const userService = new UserService();
-    const user = await userService.getUser(req.params.userId);
-    console.log(user);
-    if (user) {
-        res.status(200).send(user);
-    } else {
-        res.status(400).send();
+    constructor() {
+        this.initializeRoutes();
     }
-})
 
-router.post('/user')
+    public initializeRoutes() {
+        this.router.get(this.path + '/:userId', this.getUserById);
+    }
 
-router.delete('/user')
 
-router.put('/user')
+    getUserById = async (req, res) => {
+        const userService = new UserService();
+        const user = await userService.getUser(req.params.userId);
+        console.log(user);
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(400).send();
+        }
+    }
 
-export default router;
+}
+export default UserController;
