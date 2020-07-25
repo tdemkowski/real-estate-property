@@ -1,25 +1,23 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import UserService from '../services/user.service';
 import NotFoundException from './exceptions/NotFound.exception';
 import { BaseEntity } from '../entities/base.entity';
-import { IBaseService } from '../services/base.service';
+import { IBaseService } from '../models/IBaseService.model';
 
 class BaseController<T extends BaseEntity, DTO> {
-    private router = Router();
+    protected router = Router();
 
-    constructor(private readonly path: string, private readonly service: IBaseService<T>) {
+    constructor(protected readonly path: string, protected readonly service: IBaseService<T>) {
         this.initializeRoutes();
     }
 
-    private initializeRoutes() {
+    protected initializeRoutes() {
         this.router.get(this.path + '/:id', this.GetById);
         this.router.post(this.path, this.Create);
     }
 
     
-    Create = async (req: Request, res: Response, next: NextFunction) => {
+    protected Create = async (req: Request, res: Response, next: NextFunction) => {
         const body = req.body as DTO;
-        console.log(body);
         if(body) {
             const insert = await this.service.Create(body);
             res.send({body: insert});
@@ -28,7 +26,7 @@ class BaseController<T extends BaseEntity, DTO> {
          }
     }
 
-    GetById = async (req: Request, res: Response, next: NextFunction) => {
+    protected GetById = async (req: Request, res: Response, next: NextFunction) => {
         const obj = await this.service.FindOne(req.params.id);
         if (obj) {
             res.status(200).send(obj);

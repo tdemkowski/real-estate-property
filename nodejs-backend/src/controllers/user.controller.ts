@@ -1,29 +1,25 @@
 import { Router } from 'express';
 import UserService from '../services/user.service';
-import NotFoundException from './exceptions/NotFound.exception';
-class UserController {
+import BaseController from './base.controller';
+import { User } from '../entities/user.entity';
+class UserController extends BaseController<User, UserDTO>{
     public path = '/user';
     public router = Router();
 
     constructor() {
+        super('/user', new UserService());
         this.initializeRoutes();
     }
 
     public initializeRoutes() {
-        this.router.get(this.path + '/:userId', this.getUserById);
+        // register any other routes here
+        super.initializeRoutes()
     }
-
-
-    getUserById = async (req, res, next) => {
-        const userService = new UserService();
-        const user = await userService.FindOne(req.params.userId);
-        console.log(user);
-        if (user) {
-            res.status(200).send(user);
-        } else {
-           next(new NotFoundException(req.params.userId));
-        }
-    }
-
 }
 export default UserController;
+
+
+interface UserDTO {
+    username: string;
+    age: number;
+}

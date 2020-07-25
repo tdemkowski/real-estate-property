@@ -1,5 +1,7 @@
 import { Repository, FindManyOptions, FindOneOptions, FindConditions, InsertResult, DeepPartial } from "typeorm";
 import { BaseEntity } from "../entities/base.entity";
+import { IBaseService } from "../models/IBaseService.model";
+import { IPagination } from "../models/IPagination.model";
 
 abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
   public repository: Repository<T>;
@@ -29,22 +31,4 @@ abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
 
 export default BaseService;
 
-export interface IBaseService<T> {
-  FindAll(filter?: FindManyOptions<T>): Promise<IPagination<T>>;
-  FindOne(id: string | number | FindOneOptions<T> | FindConditions<T>, options?: FindOneOptions<T>): Promise<T | undefined>;
-  Create(entity: DeepPartial<T>, ...options: any[]): Promise<InsertResult>;
-  // Update(id: any, entity: QueryDeepPartialEntity<T>, ...options: any[]): Promise<UpdateResult | T>;
-  // Delete(id: any, ...options: any[]): Promise<DeleteResult>;
-}
 
-export interface IPagination<T> {
-  /**
-   * Items included in the current listing
-   */
-  readonly items: T[];
-
-  /**
-   * Total number of available items
-   */
-  readonly total: number;
-}
