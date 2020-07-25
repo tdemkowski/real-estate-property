@@ -15,7 +15,6 @@ class App {
     this.app = express();
     this.port = port;
  
-    this.connectToTheDatabase();
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
     // we must initialize error handling last!
@@ -42,18 +41,15 @@ class App {
     });
   }
 
-
-  public connectToTheDatabase()  {
-    createConnection();
-  }
 }
  
-
-const app = new App(
-  [
-    new UserController(),
-  ],
-  3001,
-);
- 
-app.listen();
+createConnection().then( () => {
+  const app = new App(
+    [
+      new UserController(),
+    ],
+    3002,
+  );
+  
+  app.listen();
+})
