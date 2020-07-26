@@ -17,7 +17,8 @@
         //add decorator support
         "allowSyntheticDefaultImports": false,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "esModuleInterop": true
     },
     "include": [
         "./**/*.ts"

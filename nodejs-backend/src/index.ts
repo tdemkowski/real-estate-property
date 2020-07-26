@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import * as express from 'express';
+import express = require('express');
 import UserController from './controllers/user.controller';
 import { createConnection } from 'typeorm';
 import bodyParser = require('body-parser');

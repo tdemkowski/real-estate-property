@@ -3,9 +3,11 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-    "password": "cancer",
+    "password": "admin",
     "database": "postgres",
     "synchronize": true,
     "logging": true,
-    "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"]
+    "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"],
+    "seeds": ["src/entities/seeding/**.seeder{.ts,.js}"],
+    "factories": ["src/entities/seeding/**.factory{.ts,.js"]
   }
