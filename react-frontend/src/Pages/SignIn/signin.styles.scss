@@ -1,52 +1,3 @@
-.SI-sign-in-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.SI-sign-in {
-    margin-top: 6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 0.6rem;
-}
-
-.SI-sign-in, .SI-sign-up {
-    background-color: #fff;
-    padding: 1rem;
-    border: 1px solid #dbdbdb;
-    width: 20rem;
-}
-
-.SI-sign-up {
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-}
-
-.SI-sign-up-link {
-    color: #0095f6;
-    font-weight: 600;
-}
-
-.SI-sign-in-form {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-field {
-    height: 2rem;
-    border-radius: 3px;
-    background-color: #fafafa;
-    border: 1px solid #dbdbdb;
-    margin-bottom: 0.4rem;
-    outline: none;
-}
-
 .blueButton {
     width: 80%;
     height: 2rem;
@@ -64,8 +15,61 @@
     cursor: pointer;
 }
 
-.SI-sign-up-question {
-    margin-right: 0.5rem;
-    font-size: 14px;
-    font-weight: lighter;
+.signInComponent {
+    .sign-in-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .sign-in {
+        margin-top: 6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 0.6rem;
+    }
+    
+    .sign-in, .sign-up {
+        background-color: #fff;
+        padding: 1rem;
+        border: 1px solid #dbdbdb;
+        width: 20rem;
+    }
+    
+    .sign-up {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+    }
+    
+    .sign-up-link {
+        color: #0095f6;
+        font-weight: 600;
+    }
+    
+    .sign-in-form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .input-field, .input::-webkit-input-placeholder {
+        height: 2rem;
+        border-radius: 3px;
+        background-color: #fafafa;
+        border: 1px solid #dbdbdb;
+        margin-bottom: 0.4rem;
+        outline: none;
+        padding-left: 0.5rem;
+        font-size: 12px;
+    }
+    
+    .sign-up-question {
+        margin-right: 0.5rem;
+        font-size: 14px;
+        font-weight: lighter;
+    }
 }

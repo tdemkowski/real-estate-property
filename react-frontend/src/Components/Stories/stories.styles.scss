@@ -1,0 +1,17 @@
+.homePage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .storyComponent {
+        width: 40rem;
+        height: 6rem;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

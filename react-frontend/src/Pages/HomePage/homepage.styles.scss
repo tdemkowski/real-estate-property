@@ -1,4 +1,12 @@
-.home-page {
-    display: flex;
-    justify-content: center;
+.HomePageComponent {
+    .storySection {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .feedSection {
+        display: flex;
+        justify-content: center;
+    }
 }

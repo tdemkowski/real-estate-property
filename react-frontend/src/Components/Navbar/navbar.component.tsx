@@ -17,7 +17,7 @@ const NavBar = (props: any) => {
     const path = useLocation().pathname
     const noTextDecoration = { textDecoration: 'none' }
     return (
-        <div>
+        <div className="navigationComponent">
             <div className="nav">
                 <div className="headerLogo">
                     <div className="headerLogo-Header">
