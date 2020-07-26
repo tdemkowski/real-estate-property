@@ -1,7 +1,8 @@
-import { Repository, FindManyOptions, FindOneOptions, FindConditions, InsertResult, DeepPartial } from "typeorm";
+import { Repository, FindManyOptions, FindOneOptions, FindConditions, InsertResult, DeepPartial, UpdateResult, DeleteResult } from "typeorm";
 import { BaseEntity } from "../entities/base.entity";
 import { IBaseService } from "../models/IBaseService.model";
 import { IPagination } from "../models/IPagination.model";
+import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity";
 
 abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
   public repository: Repository<T>;
@@ -26,6 +27,14 @@ abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
   public async Create(entity: DeepPartial<T>, ..._options: any[]): Promise<InsertResult> {
     const user = this.repository.create(entity);
     return await this.repository.save(user as any);
+  }
+
+  public async Update(id: string | number, newEntity: QueryDeepPartialEntity<T>): Promise<UpdateResult | T> {
+    return await this.repository.update(id, newEntity)
+  }
+
+  public async Delete(id: string | number): Promise<DeleteResult> { 
+    return await this.repository.delete(id)
   }
 }
 
