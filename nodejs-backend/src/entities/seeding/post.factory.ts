@@ -1,6 +1,5 @@
-import { define, factory } from "typeorm-seeding"
+import { define } from "typeorm-seeding"
 import { Post } from "../post.entity"
-import { User } from "../user.entity"
 import * as Faker from 'faker'
 
 define(Post, (faker: typeof Faker) => {
@@ -10,6 +9,5 @@ define(Post, (faker: typeof Faker) => {
     const post = new Post()
     post.imageUrl = image
     post.text = text
-    post.user = factory(User)() as any
     return post
   })
