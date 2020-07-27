@@ -7,7 +7,7 @@ export interface StoreState {
 }
 
 const rootReducer = combineReducers<StoreState>({
-    user: userReducer
+    user: userReducer,
 })
 
 export default rootReducer

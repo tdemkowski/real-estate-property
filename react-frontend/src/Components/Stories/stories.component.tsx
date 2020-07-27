@@ -11,7 +11,7 @@ const Stories = (props: any) => {
         <div className="homePage">
             <div className="storyComponent">
                 <Story profilePicture={profPic1} />
-                <Story profilePicture={profPic2}/>
+                <Story profilePicture={profPic2} />
             </div>
         </div>
     )

@@ -5,13 +5,13 @@ import './signin.styles.scss'
 
 const SignIn = () => {
     useEffect(() => {
-        document.title = "Sign in"
+        document.title = 'Sign in'
     })
 
     const logoStyle = {
         fontSize: '2.5rem',
         cursor: 'default',
-        marginTop: "0px"
+        marginTop: '0px',
     }
     return (
         <div className="signInComponent">

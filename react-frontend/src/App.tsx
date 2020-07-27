@@ -12,7 +12,7 @@ import pageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.componen
 class App extends Component {
     state = {
         searching: false,
-        viewActivity: false
+        viewActivity: false,
     }
 
     searchTool = () => {

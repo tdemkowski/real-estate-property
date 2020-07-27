@@ -10,7 +10,7 @@ import sampleImage_2 from './RemoveLater/chungus.jpg'
 
 const Homepage = () => {
     useEffect(() => {
-        document.title = "Instagram"
+        document.title = 'Instagram'
     })
 
     return (
@@ -19,10 +19,10 @@ const Homepage = () => {
                 <Stories />
             </div>
             <div className="feedSection">
-                <Feed user="Person1" image={sampleImage_1}/>
+                <Feed user="Person1" image={sampleImage_1} />
             </div>
             <div className="feedSection">
-                <Feed user="Person2" image={sampleImage_2}/>
+                <Feed user="Person2" image={sampleImage_2} />
             </div>
         </div>
     )

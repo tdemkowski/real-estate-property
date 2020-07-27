@@ -1,6 +1,6 @@
 enum UserActionTypes {
     GetCurrentUser,
-    SetCurrentUser
+    SetCurrentUser,
 }
 
-export default UserActionTypes;
+export default UserActionTypes

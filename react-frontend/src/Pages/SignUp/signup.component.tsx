@@ -5,13 +5,13 @@ import './signup.styles.scss'
 
 const SignUp = () => {
     useEffect(() => {
-        document.title = "Sign up"
+        document.title = 'Sign up'
     })
 
     const logoStyle = {
         fontSize: '2.5rem',
         cursor: 'default',
-        marginTop: "0px"
+        marginTop: '0px',
     }
     return (
         <div className="signUpComponent">
@@ -30,9 +30,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="log-in">
-                    <p className="log-in-question">
-                        Have an account?
-                    </p>
+                    <p className="log-in-question">Have an account?</p>
                     <Link to="/sign-in" style={{ textDecoration: 'none' }}>
                         <p className="log-in-link">Log in</p>
                     </Link>

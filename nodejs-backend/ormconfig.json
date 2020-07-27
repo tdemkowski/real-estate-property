@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-    "password": "admin",
+    "password": "cancer",
     "database": "postgres",
     "synchronize": true,
     "logging": true,
