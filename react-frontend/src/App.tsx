@@ -8,7 +8,6 @@ import SignIn from './Pages/SignIn/signin.component'
 import SignUp from './Pages/SignUp/signup.component'
 import Explore from './Pages/Explore/explore.component'
 import pageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.component'
-
 class App extends Component {
     state = {
         searching: false,
