@@ -10,30 +10,11 @@ import Explore from './Pages/Explore/explore.component'
 import pageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.component'
 
 class App extends Component {
-    state = {
-        searching: false,
-        viewActivity: false,
-    }
-
-    searchTool = () => {
-        this.setState({ searching: true })
-        setTimeout(() => this.setState({ searching: false }), 2000)
-    }
-
-    viewActivitySwitch = () => {
-        this.setState({ viewActivity: !this.state.viewActivity })
-    }
-
     render() {
         return (
             <div className="App">
                 <header className="App-header">
-                    <NavBar
-                        searching={this.state.searching}
-                        search={this.searchTool}
-                        viewActivity={this.state.viewActivity}
-                        viewActivitySwitch={this.viewActivitySwitch}
-                    />
+                    <NavBar />
                 </header>
                 <Switch>
                     <Route exact path="/" component={HomePage} />

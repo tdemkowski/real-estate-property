@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express = require('express')
 import UserController from './controllers/user.controller'
+import AuthController from './controllers/auth.controller'
 import { createConnection } from 'typeorm'
 import bodyParser = require('body-parser')
 import { Application } from 'express'
@@ -55,7 +56,7 @@ class App {
 }
 
 createConnection().then(() => {
-    const app = new App([new UserController()], 3002)
+    const app = new App([new UserController(), new AuthController()], 3002)
 
     app.listen()
 })
