@@ -16,7 +16,8 @@ const Homepage = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [user, setUser] = useState<{username: string}>()
     useEffect(() => {
-        document.title = "Instagram"
+        document.title = 'Instagram'
+            document.title = "Instagram"
         axios.get('http://localhost:3002/api/user/3376a019-c2ef-4539-bbfe-0ef35d4c045d' ).then(res =>{
             console.log(res)
             setPosts(res.data.posts);
@@ -24,6 +25,7 @@ const Homepage = () => {
             setUser({username })
             //setPosts(res.);
         })
+
     }, [1])
 
     return (
@@ -39,10 +41,10 @@ const Homepage = () => {
             )) : null
             }
             <div className="feedSection">
-                <Feed user="Person1" image={sampleImage_1}/>
+                <Feed user="Person1" image={sampleImage_1} />
             </div>
             <div className="feedSection">
-                <Feed user="Person2" image={sampleImage_2}/>
+                <Feed user="Person2" image={sampleImage_2} />
             </div>
         </div>
     )

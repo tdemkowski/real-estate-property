@@ -39,18 +39,14 @@ const NavBar = (props: any) => {
 
                 <div className="headerIcons">
                     <Link to="/explore">
-                        <img 
-                            alt="compass.png" 
-                            src={path === '/explore' ? compassFilled : compass} 
-                            className="icon" 
-                        />
+                        <img alt="compass.png" src={path === '/explore' ? compassFilled : compass} className="icon" />
                     </Link>
-                        <img
-                            alt="heart.png"
-                            src={props.viewActivity ? heartFilled : heart}
-                            className="icon"
-                            onClick={props.viewActivitySwitch}
-                        />
+                    <img
+                        alt="heart.png"
+                        src={props.viewActivity ? heartFilled : heart}
+                        className="icon"
+                        onClick={props.viewActivitySwitch}
+                    />
                     <Link to="/sign-in">
                         <img
                             alt="user.png"
