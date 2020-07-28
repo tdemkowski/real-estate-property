@@ -1,9 +1,9 @@
-import HttpException from "./http.exception";
+import HttpException from './http.exception'
 
- class UnauthorizedException extends HttpException {
-  constructor(customMessage?: string) {
-    super(401, customMessage || `Unauthorized`);
-  }
+class UnauthorizedException extends HttpException {
+    constructor(customMessage?: string) {
+        super(401, customMessage || `Unauthorized`)
+    }
 }
- 
-export default UnauthorizedException;
+
+export default UnauthorizedException
