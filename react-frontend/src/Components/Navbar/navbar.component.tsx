@@ -20,6 +20,15 @@ const NavBar = (props: any) => {
     const path = useLocation().pathname
     const noTextDecoration = { textDecoration: 'none' }
 
+    const searchTrigger = () => {
+        setSearching(true)
+        setTimeout(()=>{setSearching(false)}, 2000)
+    }
+
+    const heartClicked = () => {
+        setViewActivity(!viewActivity)
+    }
+
     return (
         <div className="navigationComponent">
             <div className="nav">
@@ -33,8 +42,8 @@ const NavBar = (props: any) => {
 
                 <div className="searchBox">
                     <img alt="search.png" src={search} className="searchBox-icon" />
-                    <input className="searchBox-input" type="text" placeholder="Search" />
-                    {props.searching ? (
+                    <input className="searchBox-input" type="text" placeholder="Search" onChange={searchTrigger} />
+                    {searching ? (
                         <img alt="search.png" src={spinner} className="searchBox-spinner" />
                     ) : (
                         <div className="searchBox-spinner"></div>
@@ -47,8 +56,9 @@ const NavBar = (props: any) => {
                     </Link>
                     <img
                         alt="heart.png"
-                        src={props.viewActivity ? heartFilled : heart}
+                        src={viewActivity ? heartFilled : heart}
                         className="icon"
+                        onClick={heartClicked}
                     />
                     <Link to="/sign-in">
                         <img
