@@ -31,7 +31,7 @@ class AuthController {
                 next(new BadRequest('Email/username already exists' + accountExists.total))
             } else {
                 await this.userService.Create(user)
-                res.send({ response: 'Account added' }) // can we implement  an OkCreate that will replace this line with OkCreate(res) ?
+                res.send({ response: 'Account added' }) // can we implement  an OkCreate that will replace this line with OkCreate(res)?
             }
         } else {
             next(new BadRequest('All fields must be filled'))
