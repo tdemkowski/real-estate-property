@@ -1,7 +1,8 @@
 import UserService from '../services/user.service'
 import { Router, NextFunction, Request, Response } from 'express'
 import BadRequest from './exceptions/BadRequest.exception'
-
+import * as bcrypt from 'bcrypt'
+import * as jwt from 'jsonwebtoken'
 class AuthController {
     public path = '/auth'
     public router = Router()
@@ -14,11 +15,34 @@ class AuthController {
 
     public initializeRoutes() {
         // register any other routes here
-        this.router.post(this.path + '/signin')
+        this.router.post(this.path + '/signin', this.SignIn)
         this.router.post(this.path + '/signup', this.SignUp)
     }
 
-    public SignUp = async (req: Request, res: Response, next: NextFunction) => {
+    private SignIn = async (req: Request, res: Response, next: NextFunction) => {
+        const { username, password, email } = req.body
+        const user = await this.userService.FindOne({ where: [{ username }, { email }] })
+        if (user) {
+            const passwordMatch = await bcrypt.compare(password, user.password)
+            if (passwordMatch) {
+                const token = jwt.sign(
+                    {
+                        email: user.email,
+                        userId: user.id,
+                    },
+                    'superdupersecretsecret',
+                    { expiresIn: '1h' },
+                )
+                res.send({ token })
+            } else {
+                next(new BadRequest("Password doesn't match"))
+            }
+        } else {
+            next(new BadRequest('User not found'))
+        }
+    }
+
+    private SignUp = async (req: Request, res: Response, next: NextFunction) => {
         const email = req.body.email
         const fullName = req.body.fullName
         const username = req.body.username
