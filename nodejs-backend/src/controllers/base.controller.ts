@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express'
 import NotFoundException from './exceptions/NotFound.exception'
 import { BaseEntity } from '../entities/base.entity'
 import BaseService from '../services/base.service'
+import authMiddleware from '../middlewares/auth.middleware'
 
 class BaseController<T extends BaseEntity, DTO> {
     protected router = Router()
@@ -11,11 +12,11 @@ class BaseController<T extends BaseEntity, DTO> {
     }
 
     protected initializeRoutes() {
-        this.router.get(this.path + '/:id', this.GetById)
-        this.router.post(this.path, this.Create)
-        this.router.put(this.path + '/:id', this.Update)
-        this.router.delete(this.path + '/:id', this.Delete)
-        this.router.get(this.path, this.FetchAll)
+        this.router.get(this.path + '/:id', authMiddleware, this.GetById)
+        this.router.post(this.path, authMiddleware, this.Create)
+        this.router.put(this.path + '/:id', authMiddleware, this.Update)
+        this.router.delete(this.path + '/:id', authMiddleware, this.Delete)
+        this.router.get(this.path, authMiddleware, this.FetchAll)
     }
 
     protected FetchAll = async (_req: Request, res: Response, _next: NextFunction) => {
