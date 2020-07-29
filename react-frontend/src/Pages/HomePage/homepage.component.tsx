@@ -1,4 +1,4 @@
-import React, { useEffect, Component, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Feed from '../../Components/Feed/feed.component'
 import Stories from '../../Components/Stories/stories.component'
@@ -7,6 +7,7 @@ import './homepage.styles.scss'
 
 import sampleImage_1 from './RemoveLater/carbonDating.png'
 import sampleImage_2 from './RemoveLater/chungus.jpg'
+import apiUrl from '../../config'
 
 interface Post {
     imageUrl: string
@@ -16,9 +17,8 @@ const Homepage = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [user, setUser] = useState<{ username: string }>()
     useEffect(() => {
-        document.title = 'Instagram'
-        document.title = 'Instagram'
-        axios.get('http://localhost:3002/api/user/3376a019-c2ef-4539-bbfe-0ef35d4c045d').then((res) => {
+            document.title = 'Instagram'
+            axios.get(`${apiUrl}user/3376a019-c2ef-4539-bbfe-0ef35d4c045d` ).then(res =>{
             console.log(res)
             setPosts(res.data.posts)
             const { username } = res.data
