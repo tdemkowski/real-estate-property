@@ -11,17 +11,21 @@
 }
 
 .navigationComponent {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    border-bottom: solid;
+    border-color: #dbdbdb;
+    border-width: thin;
+
     .heading-logo:active {
         color: #dbdbdb;
     }
 
     .nav {
-        width: 100%;
-        height: 4rem;
-        background-color: #fff;
-        border-bottom: solid;
-        border-color: #dbdbdb;
-        border-width: thin;
+        width: 80%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;

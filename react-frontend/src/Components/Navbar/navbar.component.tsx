@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './navbar.styles.scss'
 
@@ -14,8 +14,12 @@ import spinner from '../../Assets/spinner.svg'
 import { Link, useLocation } from 'react-router-dom'
 
 const NavBar = (props: any) => {
+    const [searching, setSearching] = useState(false)
+    const [viewActivity, setViewActivity] = useState(false)
+
     const path = useLocation().pathname
     const noTextDecoration = { textDecoration: 'none' }
+
     return (
         <div className="navigationComponent">
             <div className="nav">
@@ -29,7 +33,7 @@ const NavBar = (props: any) => {
 
                 <div className="searchBox">
                     <img alt="search.png" src={search} className="searchBox-icon" />
-                    <input className="searchBox-input" type="text" placeholder="Search" onChange={props.search} />
+                    <input className="searchBox-input" type="text" placeholder="Search" />
                     {props.searching ? (
                         <img alt="search.png" src={spinner} className="searchBox-spinner" />
                     ) : (
@@ -45,7 +49,6 @@ const NavBar = (props: any) => {
                         alt="heart.png"
                         src={props.viewActivity ? heartFilled : heart}
                         className="icon"
-                        onClick={props.viewActivitySwitch}
                     />
                     <Link to="/sign-in">
                         <img

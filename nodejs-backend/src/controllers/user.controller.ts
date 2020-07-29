@@ -30,9 +30,9 @@ class UserController extends BaseController<User, UserDTO> {
         }
     }
 }
-export default UserController
-
-interface UserDTO {
+export interface UserDTO {
     username: string
     age: number
 }
+
+export default UserController

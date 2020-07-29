@@ -1,12 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import NotFoundException from './exceptions/NotFound.exception'
 import { BaseEntity } from '../entities/base.entity'
-import { IBaseService } from '../models/IBaseService.model'
+import BaseService from '../services/base.service'
 
 class BaseController<T extends BaseEntity, DTO> {
     protected router = Router()
 
-    constructor(protected readonly path: string, protected readonly service: IBaseService<T>) {
+    constructor(protected readonly path: string, protected readonly service: BaseService<T>) {
         this.initializeRoutes()
     }
 

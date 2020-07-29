@@ -2,7 +2,7 @@ import HttpException from './http.exception'
 
 class BadRequest extends HttpException {
     constructor(customMessage?: string) {
-        super(403, customMessage || `Bad Request`)
+        super(400, customMessage || `Bad Request`)
     }
 }
 
