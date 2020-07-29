@@ -8,6 +8,7 @@ import SignIn from './Pages/SignIn/signin.component'
 import SignUp from './Pages/SignUp/signup.component'
 import Explore from './Pages/Explore/explore.component'
 import pageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.component'
+import Profile from './Pages/Profile/profile.component'
 class App extends Component {
     render() {
         return (
@@ -21,6 +22,7 @@ class App extends Component {
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route path="/notFoundTest" component={pageNotAvailable} />
+                    <Route path="/userTemp" component={Profile} />
                 </Switch>
             </div>
         )
