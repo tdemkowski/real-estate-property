@@ -1,0 +1,86 @@
+.profileComponent {
+    width: 100%;
+    min-height: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3rem;
+
+    .profileHeader {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 3rem;
+    }
+
+    .profileHeader-info {
+        margin-left: 5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profilePicture {
+        width: 11rem;
+        height: 11rem;
+        border-radius: 50%;
+        border: 1px solid #bbb;
+    }
+
+    .font {
+        color: #262626;
+        display: inline;
+    }
+    
+    .fontThin {
+        font-weight: lighter;
+    }
+    
+    .fontSmall {
+        font-size: 16px;
+    }
+    
+    .button {
+        padding: .3rem 1rem;
+        margin: 1rem;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: #dbdbdb;
+        outline: none;
+    }
+    
+    .button > {
+        text-decoration: none;
+    }
+    
+    .profileHeader-info-buttons {
+        height: 2rem;
+        display: flex;
+        flex-direction: row;
+        vertical-align: bottom;
+        align-items: center;
+    }
+    
+    .buttonLink {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    }
+    
+    .profileHeader-info-stats {
+        display: flex;
+    }
+    
+    .profileHeader-stat {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .profileCategories {
+        width: 60%;
+        border-top: 1px solid #dbdbdb;
+    }
+}

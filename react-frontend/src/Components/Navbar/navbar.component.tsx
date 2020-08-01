@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import './navbar.styles.scss'
 
@@ -12,10 +12,14 @@ import camera from '../../Assets/camera.svg'
 import search from '../../Assets/search.svg'
 import spinner from '../../Assets/spinner.svg'
 import { Link, useLocation } from 'react-router-dom'
+import { profile } from 'console'
 
 const NavBar = (props: any) => {
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
+    const [profileDropdown, setProfileDropdown] = useState(false)
+    const [show, setShow] = useState(false)
+    const target = useRef(null)
 
     const path = useLocation().pathname
     const noTextDecoration = { textDecoration: 'none' }
@@ -27,6 +31,10 @@ const NavBar = (props: any) => {
 
     const heartClicked = () => {
         setViewActivity(!viewActivity)
+    }
+
+    const dropdown = () => {
+        setProfileDropdown(!profileDropdown)
     }
 
     return (
@@ -48,6 +56,7 @@ const NavBar = (props: any) => {
                     ) : (
                         <div className="searchBox-spinner"></div>
                     )}
+                    
                 </div>
 
                 <div className="headerIcons">
@@ -60,13 +69,13 @@ const NavBar = (props: any) => {
                         className="icon"
                         onClick={heartClicked}
                     />
-                    <Link to="/sign-in">
+                    <div onClick={dropdown}>
                         <img
                             alt="user.png"
-                            src={path === '/sign-in' || path === '/sign-up' ? userFilled : user}
+                            src={path === '/sign-in' || path === '/sign-up' || path === '/userTemp' ? userFilled : user}
                             className="icon"
                         />
-                    </Link>
+                    </div>
 
                     <img alt="camera.png" src={camera} className="icon" />
                 </div>

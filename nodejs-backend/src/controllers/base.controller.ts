@@ -17,6 +17,8 @@ class BaseController<T extends BaseEntity, DTO> {
         this.router.put(this.path + '/:id', authMiddleware, this.Update)
         this.router.delete(this.path + '/:id', authMiddleware, this.Delete)
         this.router.get(this.path, authMiddleware, this.FetchAll)
+
+        //this.router.get(this.path + '/users/:username', authMiddleware, this.GetByUsername)
     }
 
     protected FetchAll = async (_req: Request, res: Response, _next: NextFunction) => {
@@ -64,6 +66,16 @@ class BaseController<T extends BaseEntity, DTO> {
             res.status(200).send(obj)
         } else {
             next(new NotFoundException(req.params.id))
+        }
+    }
+
+    protected GetByUsername = async (req: Request, res: Response, next: NextFunction) => {
+        const obj = await this.service.FindOne({ where: { username: req.params.username } })
+        if (obj) {
+            console.log(obj)
+            res.status(200).send(obj)
+        } else {
+            next(new NotFoundException(req.params.username))
         }
     }
 }
