@@ -27,8 +27,8 @@ export class User extends BaseEntity {
     posts: Post[]
 
     @BeforeInsert()
-    async setPassword(password: string) {
+    async setPassword(_password: string) {
         const salt = await bcrypt.genSalt()
-        this.password = await bcrypt.hash(password || this.password, salt)
+        this.password = await bcrypt.hash(this.password, salt)
     }
 }

@@ -31,7 +31,7 @@ class AuthController {
                         userId: user.id,
                     },
                     'superdupersecretsecret',
-                    { expiresIn: '1h' },
+                    { expiresIn: '24h' },
                 )
                 res.send({ token })
             } else {
