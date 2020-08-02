@@ -7,8 +7,6 @@ import axios from 'axios'
 import apiUrl from '../../config'
 
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
-import A from '../HomePage/RemoveLater/chungus.jpg'
-import B from '../HomePage/RemoveLater/carbonDating.png'
 
 const Profile = (props: any) => {
     useEffect(() => {
@@ -16,18 +14,22 @@ const Profile = (props: any) => {
     })
 
     let arr: string[] = []
-    console.log(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`)
-    axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7` )
+    axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    } )
     .then(res =>{
         for (let i=0; i < 12; i++) {
-            arr.push(res.data.posts.imageUrl)
+            arr.push(res.data.posts[i].imageUrl)
         }
     })
     .catch(error => console.log(error))
-    console.log(arr)
 
 
-    return <div className="profileComponent">
+
+    return (
+        <div className="profileComponent">
         <div className="profileHeader">
 
             <img className="profilePicture" src={profPic1} alt=""/>
@@ -73,16 +75,17 @@ const Profile = (props: any) => {
         </div>
         <div className="profileImagesSection">
             <div className="profileImages">
-                {        arr.map(url => {
-            return (
-                <div key={Math.random()} className="previewedImageWrapper">
-                    <img className="previewedImage" src={url} alt="User Post"/>
-                </div>
-            )
-        })}
+                {
+                    arr.map(url => {
+                        return <div key={Math.random()} className="previewedImageWrapper">
+                            <img className="previewedImage" src={url} alt="User Post"/>
+                        </div>
+                    })
+                }
             </div>
         </div>
     </div>
+    )
 }
 
 export default Profile
