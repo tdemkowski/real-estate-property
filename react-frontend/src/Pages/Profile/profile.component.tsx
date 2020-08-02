@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './profile.styles.scss'
 import { Link } from 'react-router-dom'
@@ -9,22 +9,30 @@ import apiUrl from '../../config'
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
 
 const Profile = (props: any) => {
+    const [arr, setArr] = useState<string[]>([])
+
     useEffect(() => {
         document.title = 'insert username'
     })
 
-    let arr: string[] = []
-    axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    } )
-    .then(res =>{
-        for (let i=0; i < 12; i++) {
-            arr.push(res.data.posts[i].imageUrl)
-        }
-    })
-    .catch(error => console.log(error))
+    if(arr.length === 0) {
+        axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        } )
+        .then(res =>{
+            let tmp: string[] = []
+            for (let i=0; i < 12; i++) {
+                tmp.push(res.data.posts[i].imageUrl)
+            }
+            if(arr !== tmp) {
+                setArr(tmp)
+            }
+        })
+        .catch(error => console.log(error))
+    }
+    console.log(arr)
 
 
 
@@ -76,11 +84,13 @@ const Profile = (props: any) => {
         <div className="profileImagesSection">
             <div className="profileImages">
                 {
-                    arr.map(url => {
-                        return <div key={Math.random()} className="previewedImageWrapper">
+                    arr ? arr.map(url => {
+                        return (
+                            <div key={Math.random()} className="previewedImageWrapper">
                             <img className="previewedImage" src={url} alt="User Post"/>
                         </div>
-                    })
+                        )
+                    }) : null
                 }
             </div>
         </div>
