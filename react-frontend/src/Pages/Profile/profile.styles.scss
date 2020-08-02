@@ -8,7 +8,7 @@
     margin-top: 3rem;
 
     .profileHeader {
-        width: 60%;
+        min-width: 60%;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
@@ -31,6 +31,7 @@
     .font {
         color: #262626;
         display: inline;
+        margin: 0;
     }
     
     .fontThin {
@@ -75,12 +76,63 @@
     }
     
     .profileHeader-stat {
-        margin-left: 1rem;
         margin-right: 1rem;
     }
 
     .profileCategories {
-        width: 60%;
+        min-width: 60%;
         border-top: 1px solid #dbdbdb;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .category {
+        position: relative;
+        top: -1px;
+        border-top: 1px solid #262626;
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+
+    .profileHeader-info-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fontThick {
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .darkBlue {
+        color: rgb(0, 68, 131);
+    }
+
+    .profileImagesSection {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profileImages {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: 18rem 18rem 18rem;
+        grid-template-rows: 18rem 18rem 18rem; 
+        grid-column-gap: 2.5rem;
+        grid-row-gap: 2.5rem;
+    }
+
+    .previewedImageWrapper {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .previewedImage {
+        width: 100%;
+        height: auto;
     }
 }

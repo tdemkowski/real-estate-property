@@ -3,13 +3,29 @@ import React, { useEffect } from 'react'
 import './profile.styles.scss'
 import { Link } from 'react-router-dom'
 import settingsIcon from '../../Assets/settings.svg'
+import axios from 'axios'
+import apiUrl from '../../config'
 
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
+import A from '../HomePage/RemoveLater/chungus.jpg'
+import B from '../HomePage/RemoveLater/carbonDating.png'
 
 const Profile = (props: any) => {
     useEffect(() => {
         document.title = 'insert username'
     })
+
+    let arr: string[] = []
+    console.log(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`)
+    axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7` )
+    .then(res =>{
+        for (let i=0; i < 12; i++) {
+            arr.push(res.data.posts.imageUrl)
+        }
+    })
+    .catch(error => console.log(error))
+    console.log(arr)
+
 
     return <div className="profileComponent">
         <div className="profileHeader">
@@ -42,8 +58,9 @@ const Profile = (props: any) => {
                 </div>
 
                 <div className="profileHeader-info-details">
+                    <p className="font fontThick">Title here or something</p>
                     <p className="font">Here is my bio blablabla yes no yes no asdlkj </p>
-                    <Link to="https://cobratate.com/">https://cobratate.com/</Link>
+                    <Link to="https://cobratate.com/" className="fontThick darkBlue">cobratate.com</Link>
                 </div>
 
             </div>
@@ -51,10 +68,19 @@ const Profile = (props: any) => {
         </div>
         
         <div className="profileCategories">
-            profileCategories section
+            <div className="category">Posts</div>
+            <div className="category">Tagged</div>
         </div>
-        <div className="profileImages">
-            image collection grid here
+        <div className="profileImagesSection">
+            <div className="profileImages">
+                {        arr.map(url => {
+            return (
+                <div key={Math.random()} className="previewedImageWrapper">
+                    <img className="previewedImage" src={url} alt="User Post"/>
+                </div>
+            )
+        })}
+            </div>
         </div>
     </div>
 }

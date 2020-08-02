@@ -4,8 +4,16 @@ import { Link } from 'react-router-dom'
 import './signin.styles.scss'
 import Axios from 'axios';
 import apiUrl from '../../config';
+import { setCurrentUser } from '../../redux/user/user.action';
+import { User } from '../../redux/user/user.models';
+import { connect } from 'react-redux';
+import BaseAction from '../../redux/base-action.model';
+import UserActionTypes from '../../redux/user/user.types';
 
-const SignIn = () => {
+interface Props {
+    setCurrentUser(user: User): BaseAction<UserActionTypes, User>
+}
+const SignIn = (props: Props) => {
     const [userOrEmail, setUserOrEmail] = useState('');
     const [password, setPassword] = useState('');
     useEffect(() => {
@@ -38,6 +46,10 @@ const SignIn = () => {
 
             Axios.post(`${apiUrl}auth/signin`, body).then(res => {
                 console.warn(res);
+                // res.data.token
+                const {email, userId, exp} = JSON.parse(atob(res.data.token.split('.')[1]));
+                window.localStorage.setItem("token", res.data.token)
+                props.setCurrentUser({email, userId, exp})
             }).catch(err => {
                 console.error(err);
             })
@@ -68,4 +80,9 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+const mapStateToProps = (state:any) => ({
+    user: state.user
+})
+const mapDispatchToProps = (dispatch: any) => ({ setCurrentUser: (user: User) => dispatch(setCurrentUser(user))});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

@@ -1,7 +1,7 @@
 export interface User {
     email: string
-    username: string
-    id: string
+    userId: string
+    exp: number
 }
 
 export interface UserState {
