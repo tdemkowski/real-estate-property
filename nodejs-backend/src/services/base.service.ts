@@ -12,8 +12,17 @@ abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
     }
 
     public async FindOne(id: string | number | FindOneOptions<T> | FindConditions<T>, options?: FindOneOptions<T>): Promise<T | undefined> {
-        const record = await this.repository.findOne(id as any, options)
+        const record = await this.repository.findOne(id as string | number, options)
         return record
+    }
+
+    public async FindAllById(id: string | number | FindManyOptions<T> | FindConditions<T>): Promise<T[]> {
+        const posts = await this.repository.find({
+            where: {
+                id: id,
+            },
+        })
+        return posts
     }
 
     public async FindAll(filter?: FindManyOptions<T>): Promise<IPagination<T>> {
