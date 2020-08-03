@@ -18,13 +18,18 @@ const Homepage = () => {
     const [user, setUser] = useState<{ username: string }>()
     useEffect(() => {
             document.title = 'Instagram'
-            axios.get(`${apiUrl}user/3376a019-c2ef-4539-bbfe-0ef35d4c045d` ).then(res =>{
-            console.log(res)
-            setPosts(res.data.posts)
-            const { username } = res.data
-            setUser({ username })
-            //setPosts(res.);
-        })
+            axios.get(`${apiUrl}user/3376a019-c2ef-4539-bbfe-0ef35d4c045d`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res =>{
+                console.log(res)
+                setPosts(res.data.posts)
+                const { username } = res.data
+                setUser({ username })
+                //setPosts(res.);
+            })
     }, [1])
 
     return (

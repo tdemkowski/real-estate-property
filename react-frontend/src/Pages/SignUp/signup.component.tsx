@@ -25,7 +25,11 @@ const SignUp = () => {
         event.preventDefault();
         const url = `${apiUrl}auth/signup`
         const body = {email, fullName, username, password}
-        Axios.post(url, body)
+        Axios.post(url, body, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
     }
 
     return (
