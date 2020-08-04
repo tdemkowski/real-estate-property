@@ -78,8 +78,8 @@ const Profile = (props: any) => {
         </div>
         
         <div className="profileCategories">
-            <div className="category">Posts</div>
-            <div className="category">Tagged</div>
+            <div className="category font">POSTS</div>
+            <div className="category font">TAGGED</div>
         </div>
         <div className="profileImagesSection">
             <div className="profileImages">

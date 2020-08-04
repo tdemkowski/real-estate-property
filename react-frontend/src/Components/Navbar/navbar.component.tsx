@@ -49,10 +49,10 @@ const NavBar = (props: any) => {
                 </div>
 
                 <div className="searchBox">
-                    <img alt="search.png" src={search} className="searchBox-icon" />
+                    <img alt="search icon" src={search} className="searchBox-icon" />
                     <input className="searchBox-input" type="text" placeholder="Search" onChange={searchTrigger} />
                     {searching ? (
-                        <img alt="search.png" src={spinner} className="searchBox-spinner" />
+                        <img className="searchBox-spinner" alt="search spinner" src={spinner}  />
                     ) : (
                         <div className="searchBox-spinner"></div>
                     )}

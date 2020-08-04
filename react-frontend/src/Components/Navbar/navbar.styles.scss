@@ -20,6 +20,10 @@
     border-color: #dbdbdb;
     border-width: thin;
 
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
     .heading-logo:active {
         color: #dbdbdb;
     }
@@ -30,50 +34,58 @@
         justify-content: space-evenly;
         align-items: center;
     }
+
+    @media only screen and (max-width: 767px) {
+        .searchBox {
+            display: none;
+        }
+    }
     
-    .searchBox {
-        width: 12rem;
-        min-width: 12rem;
-        height: 1.5rem;
-        margin-left: 3rem;
-        background-color: #fafafa;
-        border: 1px solid #dbdbdb;
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    @media only screen and (min-width: 768px) {
+        .searchBox {
+            width: 12rem;
+            min-width: 12rem;
+            height: 1.5rem;
+            margin-left: 3rem;
+            background-color: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .searchBox-icon {
+            height: 0.8rem;
+            margin-left: 0.5rem;
+            color: #dbdbdb;
+            filter: invert(48%) sepia(0%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+        }
+
+        .searchBox-input {
+            width: 60%;
+            background-color: #fafafa;
+            border-color: inherit;
+            border: none;
+            text-align: center;
+        }
+
+        .searchBox-input:focus {
+            outline: none;
+            text-align: left;
+        }
+        
+        .searchBox-spinner{
+            height: 1.2rem;
+            background: #fafafa;
+            margin: 0.4rem;
+        }
     }
     
     .headerIcons {
         display: flex;
         width: 200px;
         justify-content: space-evenly;
-    }
-    
-    .searchBox-icon {
-        height: 0.8rem;
-        margin-left: 0.5rem;
-        color: #dbdbdb;
-        filter: invert(48%) sepia(0%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
-    }
-    
-    .searchBox-input {
-        width: 60%;
-        background-color: #fafafa;
-        border-color: inherit;
-        border: none;
-        text-align: center;
-    }
-    
-    .searchBox-input:focus {
-        outline: none;
-        text-align: left;
-    }
-    
-    .searchBox-spinner{
-        height: 1.2rem;
-        background: #fafafa;
-        margin: 0.4rem;
     }
 }
 
