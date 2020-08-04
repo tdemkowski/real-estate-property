@@ -1,9 +1,10 @@
 import HttpSuccess from './http.success'
+import { Response } from 'express'
 
-class OK extends HttpSuccess {
-    constructor(customMessage?: string) {
-        super(200, customMessage || `OK`)
+class OKSuccess extends HttpSuccess {
+    constructor(res: Response | null, object: any, customMessage?: string) {
+        super(200, customMessage || `OK`, res, object)
     }
 }
 
-export default OK
+export default OKSuccess

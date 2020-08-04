@@ -1,9 +1,9 @@
 import HttpSuccess from './http.success'
 
-class NonAuthoritativeInformation extends HttpSuccess {
+class NonAuthoritativeInformationSuccess extends HttpSuccess {
     constructor(customMessage?: string) {
-        super(203, customMessage || `NonAuthoritativeInformation`)
+        super(203, customMessage || `NonAuthoritativeInformation`, null, null)
     }
 }
 
-export default NonAuthoritativeInformation
+export default NonAuthoritativeInformationSuccess
