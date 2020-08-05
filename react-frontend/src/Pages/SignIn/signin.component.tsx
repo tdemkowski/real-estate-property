@@ -18,6 +18,7 @@ const SignIn = (props: Props) => {
     const [password, setPassword] = useState('');
     const [borderSuccessStyle, setBorderSuccessStyle] = useState({borderColor: '#dbdbdb'})
     const [redirect, setRedirect] = useState(false)
+    const [failedMessage, setFailedMessage] = useState('')
 
     useEffect(() => {
         document.title = 'Sign in'
@@ -32,6 +33,14 @@ const SignIn = (props: Props) => {
     const renderRedirect = () => {
         if (redirect) {
             return <Redirect to="/" />
+        }
+    }
+    
+    const failed = () => {
+        if (failedMessage) {
+            return <p style={{color: '#b80000'}} className="font">{failedMessage}</p>
+        } else {
+            return null
         }
     }
 
@@ -61,9 +70,12 @@ const SignIn = (props: Props) => {
                 setBorderSuccessStyle({borderColor: '#dbdbdb'})
                 setRedirect(true)
             }).catch(err => {
-                console.error(err);
+                setFailedMessage('Failed to log in.')
                 setBorderSuccessStyle({borderColor: 'red'})
             })
+        } else {
+            setFailedMessage('Fill up all fields.')
+            setBorderSuccessStyle({borderColor: 'red'})
         }
     }
     return (
@@ -77,6 +89,7 @@ const SignIn = (props: Props) => {
                     <form onSubmit={(event) => handleSubmit(event)} className="sign-in-form">
                         <input autoComplete="username" type="text" name="username" placeholder="Username or email" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setUserOrEmail(event.target.value)} className="input-field" style={borderSuccessStyle} />
                         <input autoComplete="current-password" autoCapitalize="off" autoCorrect="off" type="password" name="password" placeholder="Password" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setPassword(event.target.value)} className="input-field" style={borderSuccessStyle} />
+                        {failed()}
                         <button type="submit" className="blueButton">Log In</button>
                     </form>
                 </div>
