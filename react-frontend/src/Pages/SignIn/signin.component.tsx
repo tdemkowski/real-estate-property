@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route, Redirect } from 'react-router-dom'
 
 import './signin.styles.scss'
 import Axios from 'axios';
@@ -16,6 +16,9 @@ interface Props {
 const SignIn = (props: Props) => {
     const [userOrEmail, setUserOrEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [borderSuccessStyle, setBorderSuccessStyle] = useState({borderColor: '#dbdbdb'})
+    const [redirect, setRedirect] = useState(false)
+
     useEffect(() => {
         document.title = 'Sign in'
     })
@@ -24,6 +27,12 @@ const SignIn = (props: Props) => {
         fontSize: '2.5rem',
         cursor: 'default',
         marginTop: '0px',
+    }
+
+    const renderRedirect = () => {
+        if (redirect) {
+            return <Redirect to="/" />
+        }
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,12 +55,14 @@ const SignIn = (props: Props) => {
 
             Axios.post(`${apiUrl}auth/signin`, body).then(res => {
                 console.warn(res);
-                // res.data.token
                 const {email, userId, exp} = JSON.parse(atob(res.data.token.split('.')[1]));
                 window.localStorage.setItem("token", res.data.token)
                 props.setCurrentUser({email, userId, exp})
+                setBorderSuccessStyle({borderColor: '#dbdbdb'})
+                setRedirect(true)
             }).catch(err => {
                 console.error(err);
+                setBorderSuccessStyle({borderColor: 'red'})
             })
         }
     }
@@ -62,9 +73,10 @@ const SignIn = (props: Props) => {
                     <h1 className="heading-logo" style={logoStyle}>
                         Instagram
                     </h1>
+                    {renderRedirect()}
                     <form onSubmit={(event) => handleSubmit(event)} className="sign-in-form">
-                        <input autoComplete="username" type="text" name="username" placeholder="Username or email" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setUserOrEmail(event.target.value)} className="input-field" />
-                        <input autoComplete="current-password" autoCapitalize="off" autoCorrect="off" type="password" name="password" placeholder="Password" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setPassword(event.target.value)} className="input-field" />
+                        <input autoComplete="username" type="text" name="username" placeholder="Username or email" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setUserOrEmail(event.target.value)} className="input-field" style={borderSuccessStyle} />
+                        <input autoComplete="current-password" autoCapitalize="off" autoCorrect="off" type="password" name="password" placeholder="Password" onChange={(event:  React.ChangeEvent<HTMLInputElement> ) => setPassword(event.target.value)} className="input-field" style={borderSuccessStyle} />
                         <button type="submit" className="blueButton">Log In</button>
                     </form>
                 </div>
