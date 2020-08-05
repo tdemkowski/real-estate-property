@@ -1,0 +1,22 @@
+.suggestionComponent {
+    .heading {
+        color: #262626;
+    }
+
+    .userCard {
+        width: 25rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .grey {
+        color: #999;
+    }
+
+    .blueButton {
+        background-color: #0095f6;
+        width: 7rem;
+    }
+}

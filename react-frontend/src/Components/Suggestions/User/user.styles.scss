@@ -1,0 +1,24 @@
+.user {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .profilePicWrapper {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid #bbb;
+    }
+
+    .profilePic {
+        height: 100%;
+        width: 100%;
+    }
+
+    .userDetails {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+}

@@ -1,4 +1,8 @@
 .HomePageComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
     .storySection {
         display: flex;
         flex-direction: row;
@@ -8,5 +12,10 @@
     .feedSection {
         display: flex;
         justify-content: center;
+    }
+
+    .HomePageSide {
+        margin-top: 5rem;
+        margin-left: 2rem;
     }
 }

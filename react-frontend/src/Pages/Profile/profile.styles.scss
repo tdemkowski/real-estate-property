@@ -1,3 +1,22 @@
+.font {
+    color: #262626;
+    display: inline;
+    margin: 0;
+}
+
+.fontThin {
+    font-weight: lighter;
+}
+
+.fontSmall {
+    font-size: 16px;
+}
+
+.fontThick {
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .profileComponent {
     width: 100%;
     min-height: 50rem;
@@ -28,19 +47,6 @@
         border: 1px solid #bbb;
     }
 
-    .font {
-        color: #262626;
-        display: inline;
-        margin: 0;
-    }
-    
-    .fontThin {
-        font-weight: lighter;
-    }
-    
-    .fontSmall {
-        font-size: 16px;
-    }
     
     .button {
         padding: .3rem 1rem;
@@ -104,10 +110,6 @@
         flex-direction: column;
     }
 
-    .fontThick {
-        font-weight: bold;
-        text-decoration: none;
-    }
 
     .darkBlue {
         color: rgb(0, 68, 131);
