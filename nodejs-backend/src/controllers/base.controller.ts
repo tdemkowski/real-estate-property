@@ -1,8 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import NotFoundException from './exceptions/NotFound.exception'
+import BadRequest from './exceptions/BadRequest.exception'
 import { BaseEntity } from '../entities/base.entity'
 import BaseService from '../services/base.service'
 import authMiddleware from '../middlewares/auth.middleware'
+import NoContentSuccess from './success/NoContent.success'
+import OKSuccess from './success/OK.success'
+import CreatedSuccess from './success/Created.success'
 
 class BaseController<T extends BaseEntity, DTO> {
     protected router = Router()
@@ -21,59 +25,60 @@ class BaseController<T extends BaseEntity, DTO> {
         //this.router.get(this.path + '/users/:username', authMiddleware, this.GetByUsername)
     }
 
-    protected FetchAll = async (_req: Request, res: Response, _next: NextFunction) => {
+    protected FetchAll = async (_req: Request, res: Response, next: NextFunction) => {
         const findAll = await this.service.FindAll()
-        res.send({
-            response: findAll,
-        })
+        if (findAll) {
+            next(new OKSuccess(res, { response: findAll }))
+        } else {
+            next(new BadRequest(findAll))
+        }
     }
 
     protected Create = async (req: Request, res: Response, next: NextFunction) => {
         const body = req.body as DTO
         if (body) {
             const insert = await this.service.Create(body)
-            res.send({
-                body: insert,
-            })
+            next(new CreatedSuccess(res, { body: insert }))
         } else {
-            next('ERROR ERROR ERROR') // IMPLEMENT BadRequestException
+            next(new BadRequest('Object created'))
         }
     }
 
-    protected Update = async (req: Request, res: Response, next: NextFunction) => {
+    protected Update = async (req: Request, _res: Response, next: NextFunction) => {
         const body = req.body as DTO
-        const userId = req.params.id
+        const id = req.params.id
         if (body) {
-            await this.service.Update(userId, body)
-            res.send({
-                status: 'Object updated',
-            })
+            await this.service.Update(id, body)
+            next(new NoContentSuccess())
         } else {
-            next('ERROR ERROR ERROR') // IMPLEMENT BadRequestException
+            next(new BadRequest(id))
         }
     }
 
-    protected Delete = async (req: Request, res: Response, _next: NextFunction) => {
-        await this.service.Delete(req.params.id)
-        res.send({
-            response: 'Object deleted',
-        })
+    protected Delete = async (req: Request, _res: Response, next: NextFunction) => {
+        const id = req.params.id
+        if (id) {
+            await this.service.Delete(id)
+            next(new NoContentSuccess(id))
+        } else {
+            next(new NotFoundException(id))
+        }
     }
 
     protected GetById = async (req: Request, res: Response, next: NextFunction) => {
-        const obj = await this.service.FindOne(req.params.id)
+        const id = req.params.id
+        const obj = await this.service.FindOne(id)
         if (obj) {
-            res.status(200).send(obj)
+            next(new OKSuccess(res, obj))
         } else {
-            next(new NotFoundException(req.params.id))
+            next(new NotFoundException(id))
         }
     }
 
     protected GetByUsername = async (req: Request, res: Response, next: NextFunction) => {
         const obj = await this.service.FindOne({ where: { username: req.params.username } })
         if (obj) {
-            console.log(obj)
-            res.status(200).send(obj)
+            next(new OKSuccess(res, obj))
         } else {
             next(new NotFoundException(req.params.username))
         }

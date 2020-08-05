@@ -1,9 +1,9 @@
 import HttpSuccess from './http.success'
 
-class NoContent extends HttpSuccess {
+class NoContentSuccess extends HttpSuccess {
     constructor(customMessage?: string) {
-        super(202, customMessage || `NoContent`)
+        super(204, customMessage || `NoContent`, null, null)
     }
 }
 
-export default NoContent
+export default NoContentSuccess
