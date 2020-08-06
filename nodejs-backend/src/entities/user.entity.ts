@@ -1,6 +1,7 @@
 import { Entity, Column, OneToMany, BeforeInsert } from 'typeorm'
 import { BaseEntity } from './base.entity'
 import { Post } from './post.entity'
+import { Comment } from './comment.entity'
 import * as bcrypt from 'bcrypt'
 
 @Entity()
@@ -25,6 +26,9 @@ export class User extends BaseEntity {
 
     @OneToMany((_type) => Post, (post) => post.user)
     posts: Post[]
+
+    @OneToMany((_type) => Comment, (comment) => comment.user)
+    comments: Comment[]
 
     @BeforeInsert()
     async setPassword(_password: string) {
