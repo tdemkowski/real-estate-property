@@ -13,6 +13,39 @@ import search from '../../Assets/search.svg'
 import spinner from '../../Assets/spinner.svg'
 import { Link, useLocation } from 'react-router-dom'
 import { profile } from 'console'
+import { Menu, Dropdown, Button, message, Avatar } from 'antd';
+import { SettingTwoTone, HeartTwoTone, UserOutlined } from '@ant-design/icons';
+
+
+
+function handleMenuClick(e: any) {
+    message.info('Click on menu item.');
+    console.log('click', e);
+    // if key = 1, go to profile
+    // if key = 2, go to saved posts
+    // if key = 3, go to profile settings
+    // if key = 4, log out
+  }
+
+const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="1" icon={<UserOutlined />}>
+        Profile
+      </Menu.Item>
+      <Menu.Item key="2" icon={<HeartTwoTone twoToneColor="#eb2f96" />}>
+        Saved
+      </Menu.Item>
+      <Menu.Item key="3" icon={<SettingTwoTone twoToneColor="#52c41a"/>}>
+        Settings
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="4">
+        Log out
+      </Menu.Item>
+    </Menu>
+  );
+
+
 
 const NavBar = (props: any) => {
     const [searching, setSearching] = useState(false)
@@ -78,6 +111,11 @@ const NavBar = (props: any) => {
                     </div>
 
                     <img alt="camera.png" src={camera} className="icon" />
+
+                    <Dropdown overlay={menu}>
+                        <Avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+                        </Avatar>
+                    </Dropdown>
                 </div>
             </div>
         </div>
