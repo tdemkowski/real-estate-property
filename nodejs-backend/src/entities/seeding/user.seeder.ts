@@ -5,6 +5,7 @@ import { Post } from '../post.entity'
 
 export default class CreateUsers implements Seeder {
     public async run(factory: Factory, _connection: Connection): Promise<any> {
+        // mass seed
         await factory(User)()
             .map(async (user: User) => {
                 const numberOfPosts = 40 + Math.floor(Math.random() * 150)
@@ -12,6 +13,14 @@ export default class CreateUsers implements Seeder {
                 user.posts = posts
                 return user
             })
-            .createMany(3)
+            .createMany(20)
+
+        // admin account
+        await factory(User)().create({
+            email: 'admin@admin.com',
+            fullName: 'admin',
+            username: 'admin',
+            password: 'admin',
+        })
     }
 }
