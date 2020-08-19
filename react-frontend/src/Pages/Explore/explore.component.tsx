@@ -11,22 +11,23 @@ const Explore = (props: any) => {
         document.title = 'Instagram'
     })
 
-    if(arr.length === 0) {
-        axios.get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        } )
-        .then(res =>{
-            let tmp: string[] = []
-            for (let i=0; i < 12; i++) {
-                tmp.push(res.data.posts[i].imageUrl)
-            }
-            if(arr !== tmp) {
-                setArr(tmp)
-            }
-        })
-        .catch(error => console.log(error))
+    if (arr.length === 0) {
+        axios
+            .get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((res) => {
+                const tmp: string[] = []
+                for (let i = 0; i < 12; i++) {
+                    tmp.push(res.data.posts[i].imageUrl)
+                }
+                if (arr !== tmp) {
+                    setArr(tmp)
+                }
+            })
+            .catch((error) => console.log(error))
     }
     console.log(arr)
 
@@ -34,21 +35,23 @@ const Explore = (props: any) => {
     // that is, 2 quarter sized images on left side, one normal size on right --> six quarter sized images --> 1 normal on left & 2 quarter sized on right --> etc
     // that is, 3 types of 'chunks' of images
 
-    return  <div className="explorePageComponent">
-        <div className="exploreImagesSection">
+    return (
+        <div className="explorePageComponent">
+            <div className="exploreImagesSection">
                 <div className="exploreImages">
-                    {
-                        arr ? arr.map(url => {
-                            return (
-                                <figure key={url} className="exploreImageWrapper">
-                                    <img className="exploreImage" src={url} alt="User Post"/>
-                                </figure>
-                            )
-                        }) : null
-                    }
+                    {arr
+                        ? arr.map((url) => {
+                              return (
+                                  <figure key={url} className="exploreImageWrapper">
+                                      <img className="exploreImage" src={url} alt="User Post" />
+                                  </figure>
+                              )
+                          })
+                        : null}
                 </div>
             </div>
         </div>
+    )
 }
 
 export default Explore

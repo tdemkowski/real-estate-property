@@ -12,54 +12,37 @@ import camera from '../../Assets/camera.svg'
 import search from '../../Assets/search.svg'
 import spinner from '../../Assets/spinner.svg'
 import { Link, useLocation } from 'react-router-dom'
-import { profile } from 'console'
-import { Menu, Dropdown, Button, message, Avatar } from 'antd';
-import { SettingTwoTone, HeartTwoTone, UserOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, message, Avatar } from 'antd'
+import { SettingTwoTone, HeartTwoTone, UserOutlined } from '@ant-design/icons'
+import { deleteCurrentUser } from '../../redux/user/user.action'
+import { connect } from 'react-redux'
+import BaseAction from '../../redux/base-action.model'
+import UserActionTypes from '../../redux/user/user.types'
 
+enum MenuActions {
+    goToProfile,
+    goToSaved,
+    goToSettings,
+    logOut,
+}
 
+interface Props {
+    deleteCurrentUser: () => BaseAction<UserActionTypes, null>
+}
 
-function handleMenuClick(e: any) {
-    message.info('Click on menu item.');
-    console.log('click', e);
-    // if key = 1, go to profile
-    // if key = 2, go to saved posts
-    // if key = 3, go to profile settings
-    // if key = 4, log out
-  }
-
-const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        Profile
-      </Menu.Item>
-      <Menu.Item key="2" icon={<HeartTwoTone twoToneColor="#eb2f96" />}>
-        Saved
-      </Menu.Item>
-      <Menu.Item key="3" icon={<SettingTwoTone twoToneColor="#52c41a"/>}>
-        Settings
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="4">
-        Log out
-      </Menu.Item>
-    </Menu>
-  );
-
-
-
-const NavBar = (props: any) => {
+const NavBar = (props: Props) => {
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
     const [profileDropdown, setProfileDropdown] = useState(false)
-    const [show, setShow] = useState(false)
-    const target = useRef(null)
 
     const path = useLocation().pathname
     const noTextDecoration = { textDecoration: 'none' }
 
     const searchTrigger = () => {
         setSearching(true)
-        setTimeout(()=>{setSearching(false)}, 2000)
+        setTimeout(() => {
+            setSearching(false)
+        }, 2000)
     }
 
     const heartClicked = () => {
@@ -69,6 +52,29 @@ const NavBar = (props: any) => {
     const dropdown = () => {
         setProfileDropdown(!profileDropdown)
     }
+
+    const handleMenuClick = (e: any) => {
+        if (+e.key === MenuActions.logOut) {
+            message.error('LOGOUT')
+            props.deleteCurrentUser()
+        }
+    }
+
+    const menu = (
+        <Menu onClick={handleMenuClick}>
+            <Menu.Item key={MenuActions.goToProfile} icon={<UserOutlined />}>
+                Profile
+            </Menu.Item>
+            <Menu.Item key={MenuActions.goToSaved} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>
+                Saved
+            </Menu.Item>
+            <Menu.Item key={MenuActions.goToSettings} icon={<SettingTwoTone twoToneColor="#52c41a" />}>
+                Settings
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key={MenuActions.logOut}>Log out</Menu.Item>
+        </Menu>
+    )
 
     return (
         <div className="navigationComponent">
@@ -85,11 +91,10 @@ const NavBar = (props: any) => {
                     <img alt="search icon" src={search} className="searchBox-icon" />
                     <input className="searchBox-input" type="text" placeholder="Search" onChange={searchTrigger} />
                     {searching ? (
-                        <img className="searchBox-spinner" alt="search spinner" src={spinner}  />
+                        <img className="searchBox-spinner" alt="search spinner" src={spinner} />
                     ) : (
                         <div className="searchBox-spinner"></div>
                     )}
-                    
                 </div>
 
                 <div className="headerIcons">
@@ -113,8 +118,10 @@ const NavBar = (props: any) => {
                     <img alt="camera.png" src={camera} className="icon" />
 
                     <Dropdown overlay={menu}>
-                        <Avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
-                        </Avatar>
+                        <Avatar
+                            size="large"
+                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        ></Avatar>
                     </Dropdown>
                 </div>
             </div>
@@ -122,4 +129,7 @@ const NavBar = (props: any) => {
     )
 }
 
-export default NavBar
+
+const mapDispatchToProps = (dispatch: any) => ({ deleteCurrentUser: () => dispatch(deleteCurrentUser()) })
+
+export default connect(null, mapDispatchToProps)(NavBar)

@@ -10,7 +10,7 @@ const SignUp = () => {
     const [fullName, setFullName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [borderSuccessStyle, setBorderSuccessStyle] = useState({borderColor: '#dbdbdb'})
+    const [borderSuccessStyle, setBorderSuccessStyle] = useState({ borderColor: '#dbdbdb' })
     const [redirect, setRedirect] = useState(false)
     const [failedMessage, setFailedMessage] = useState('')
 
@@ -26,7 +26,11 @@ const SignUp = () => {
 
     const failed = () => {
         if (failedMessage) {
-            return <p style={{color: '#b80000'}} className="font">{failedMessage}</p>
+            return (
+                <p style={{ color: '#b80000' }} className="font">
+                    {failedMessage}
+                </p>
+            )
         } else {
             return null
         }
@@ -39,28 +43,27 @@ const SignUp = () => {
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        event.preventDefault()
         const url = `${apiUrl}auth/signup`
-        const body = {email, fullName, username, password}
+        const body = { email, fullName, username, password }
         if (email && fullName && username && password) {
             Axios.post(url, body, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             })
-            .then(res => {
-                setBorderSuccessStyle({borderColor: '#dbdbdb'})
-                setRedirect(true)
-            })
-            .catch(err => {
-                setFailedMessage('Email or username is already registered.')
-                setBorderSuccessStyle({borderColor: '#b80000'})
-            })
+                .then((res) => {
+                    setBorderSuccessStyle({ borderColor: '#dbdbdb' })
+                    setRedirect(true)
+                })
+                .catch((err) => {
+                    setFailedMessage('Email or username is already registered.')
+                    setBorderSuccessStyle({ borderColor: '#b80000' })
+                })
         } else {
             setFailedMessage('Fill up all fields.')
-            setBorderSuccessStyle({borderColor: '#b80000'})
+            setBorderSuccessStyle({ borderColor: '#b80000' })
         }
-
     }
 
     return (
@@ -72,12 +75,38 @@ const SignUp = () => {
                     </h1>
                     {renderRedirect()}
                     <form className="sign-up-form" onSubmit={(event) => handleSubmit(event)}>
-                        <input placeholder="Email" type="text" className="input-field" onChange={event => setEmail(event.target.value)} style={borderSuccessStyle}/>
-                        <input placeholder="Full Name" type="text" className="input-field" onChange={event => setFullName(event.target.value)} style={borderSuccessStyle}/>
-                        <input placeholder="Username" type="text" className="input-field" onChange={event => setUsername(event.target.value)} style={borderSuccessStyle}/>
-                        <input placeholder="Password" type="password" className="input-field" onChange={event => setPassword(event.target.value)} style={borderSuccessStyle}/>
+                        <input
+                            placeholder="Email"
+                            type="text"
+                            className="input-field"
+                            onChange={(event) => setEmail(event.target.value)}
+                            style={borderSuccessStyle}
+                        />
+                        <input
+                            placeholder="Full Name"
+                            type="text"
+                            className="input-field"
+                            onChange={(event) => setFullName(event.target.value)}
+                            style={borderSuccessStyle}
+                        />
+                        <input
+                            placeholder="Username"
+                            type="text"
+                            className="input-field"
+                            onChange={(event) => setUsername(event.target.value)}
+                            style={borderSuccessStyle}
+                        />
+                        <input
+                            placeholder="Password"
+                            type="password"
+                            className="input-field"
+                            onChange={(event) => setPassword(event.target.value)}
+                            style={borderSuccessStyle}
+                        />
                         {failed()}
-                        <button type="submit" className="blueButton">Sign Up</button>
+                        <button type="submit" className="blueButton">
+                            Sign Up
+                        </button>
                     </form>
                 </div>
 

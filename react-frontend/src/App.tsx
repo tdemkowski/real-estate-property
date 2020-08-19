@@ -9,34 +9,27 @@ import SignUp from './Pages/SignUp/signup.component'
 import Explore from './Pages/Explore/explore.component'
 import PageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.component'
 import Profile from './Pages/Profile/profile.component'
+import GuardedRoute from './HighOrderComponents/guard-route.hoc'
 class App extends Component {
     render() {
         return (
             <div className="App">
-
                 <Switch>
-
+                    <NavBar />
                     <Route exact path="/">
-                        <NavBar />
                         <HomePage />
                     </Route>
-                    <Route path="/explore" >
-                        <NavBar />
+                    <Route path="/explore">
                         <Explore />
                     </Route>
 
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/sign-up" component={SignUp} />
 
-                    <Route path="/notFoundTest" >
-                        <NavBar />
+                    <Route path="/notFoundTest">
                         <PageNotAvailable />
                     </Route>
-                    <Route path="/userTemp" >
-                        <NavBar />
-                        <Profile />
-                    </Route>
-
+                    <GuardedRoute path="/userTemp" auth component={Profile}/>
                 </Switch>
             </div>
         )

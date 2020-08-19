@@ -14,18 +14,18 @@ const ProfileDropdown = (props: any) => {
     return (
         <div className="dropdownComponent">
             <Link to={profile}>
-                <img className="icon" src={profileIcon} alt=""/>
+                <img className="icon" src={profileIcon} alt="" />
                 <p>Profile</p>
             </Link>
             <Link to={saved}>
-                <img className="icon" src={settings} alt=""/>
+                <img className="icon" src={settings} alt="" />
                 <p>Saved</p>
             </Link>
             <Link to={settings}>
-                <img className="icon" src={settingsIcon} alt=""/>
+                <img className="icon" src={settingsIcon} alt="" />
                 <p>Settings</p>
             </Link>
-            <hr/>
+            <hr />
             <Link to="OJQLEJQWEQe">
                 <p>Log Out</p>
             </Link>

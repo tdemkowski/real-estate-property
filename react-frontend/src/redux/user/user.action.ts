@@ -7,7 +7,7 @@ export const setCurrentUser = (user: User): BaseAction<UserActionTypes, User> =>
     payload: user,
 })
 
-export const deleteCurrentUser = () : BaseAction<UserActionTypes, null> => ({
+export const deleteCurrentUser = (): BaseAction<UserActionTypes, null> => ({
     type: UserActionTypes.DeleteCurrentUser,
-    payload: null
+    payload: null,
 })

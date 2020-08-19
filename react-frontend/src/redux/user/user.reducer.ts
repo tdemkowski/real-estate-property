@@ -3,9 +3,7 @@ import { User, UserState } from './user.models'
 import BaseAction from '../base-action.model'
 
 const INITIAL_STATE = {
-    currentUser: null,
-    crippleStatus: true,
-    cancerStatus: 'very true'
+    currentUser: null
 }
 
 export const userReducer = (state: UserState = INITIAL_STATE, action: BaseAction<UserActionTypes, User>) => {
@@ -18,7 +16,7 @@ export const userReducer = (state: UserState = INITIAL_STATE, action: BaseAction
         case UserActionTypes.DeleteCurrentUser:
             return {
                 ...state,
-                currentUser: null
+                currentUser: null,
             }
         default:
             return state
