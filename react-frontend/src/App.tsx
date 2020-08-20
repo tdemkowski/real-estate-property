@@ -14,8 +14,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <NavBar />
                 <Switch>
-                    <NavBar />
                     <Route exact path="/">
                         <HomePage />
                     </Route>
@@ -29,7 +29,9 @@ class App extends Component {
                     <Route path="/notFoundTest">
                         <PageNotAvailable />
                     </Route>
-                    <GuardedRoute path="/userTemp" auth component={Profile}/>
+                    <GuardedRoute path="/profile" auth={false} component={Profile}/>
+                    <SignUp></SignUp>
+
                 </Switch>
             </div>
         )

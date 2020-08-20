@@ -18,6 +18,7 @@ import { deleteCurrentUser } from '../../redux/user/user.action'
 import { connect } from 'react-redux'
 import BaseAction from '../../redux/base-action.model'
 import UserActionTypes from '../../redux/user/user.types'
+import { Button } from 'antd';
 
 enum MenuActions {
     goToProfile,
@@ -123,6 +124,17 @@ const NavBar = (props: Props) => {
                             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                         ></Avatar>
                     </Dropdown>
+                </div>
+
+                <div className="div">
+                    <Link to="/sign-in">
+                        <Button type="primary" >
+                             Log in
+                        </Button>
+                    </Link>
+                    <Link to="/sign-up">
+                        <Button>Sign up</Button>
+                    </Link>
                 </div>
             </div>
         </div>
