@@ -18,7 +18,8 @@ import { deleteCurrentUser } from '../../redux/user/user.action'
 import { connect } from 'react-redux'
 import BaseAction from '../../redux/base-action.model'
 import UserActionTypes from '../../redux/user/user.types'
-import { Button } from 'antd';
+import { Button } from 'antd'
+import { UserState } from '../../redux/user/user.models'
 
 enum MenuActions {
     goToProfile,
@@ -29,9 +30,12 @@ enum MenuActions {
 
 interface Props {
     deleteCurrentUser: () => BaseAction<UserActionTypes, null>
+    user: UserState
 }
 
 const NavBar = (props: Props) => {
+    console.log('cough')
+    console.log(props.user)
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
     const [profileDropdown, setProfileDropdown] = useState(false)
@@ -98,50 +102,61 @@ const NavBar = (props: Props) => {
                     )}
                 </div>
 
-                <div className="headerIcons">
-                    <Link to="/explore">
-                        <img alt="compass.png" src={path === '/explore' ? compassFilled : compass} className="icon" />
-                    </Link>
-                    <img
-                        alt="heart.png"
-                        src={viewActivity ? heartFilled : heart}
-                        className="icon"
-                        onClick={heartClicked}
-                    />
-                    <div onClick={dropdown}>
+                {props.user.currentUser ? (
+                    <div className="headerIcons">
+                        <Link to="/explore">
+                            <img
+                                alt="compass.png"
+                                src={path === '/explore' ? compassFilled : compass}
+                                className="icon"
+                            />
+                        </Link>
                         <img
-                            alt="user.png"
-                            src={path === '/sign-in' || path === '/sign-up' || path === '/userTemp' ? userFilled : user}
+                            alt="heart.png"
+                            src={viewActivity ? heartFilled : heart}
                             className="icon"
+                            onClick={heartClicked}
                         />
+                        <div onClick={dropdown}>
+                            <img
+                                alt="user.png"
+                                src={
+                                    path === '/sign-in' || path === '/sign-up' || path === '/userTemp'
+                                        ? userFilled
+                                        : user
+                                }
+                                className="icon"
+                            />
+                        </div>
+
+                        <img alt="camera.png" src={camera} className="icon" />
+
+                        <Dropdown overlay={menu}>
+                            <Avatar
+                                size="large"
+                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            ></Avatar>
+                        </Dropdown>
                     </div>
-
-                    <img alt="camera.png" src={camera} className="icon" />
-
-                    <Dropdown overlay={menu}>
-                        <Avatar
-                            size="large"
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        ></Avatar>
-                    </Dropdown>
-                </div>
-
-                <div className="div">
-                    <Link to="/sign-in">
-                        <Button type="primary" >
-                             Log in
-                        </Button>
-                    </Link>
-                    <Link to="/sign-up">
-                        <Button>Sign up</Button>
-                    </Link>
-                </div>
+                ) : (
+                    <div className="div">
+                        <Link to="/sign-in">
+                            <Button type="primary">Log in</Button>
+                        </Link>
+                        <Link to="/sign-up">
+                            <Button>Sign up</Button>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     )
 }
 
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+})
 
 const mapDispatchToProps = (dispatch: any) => ({ deleteCurrentUser: () => dispatch(deleteCurrentUser()) })
 
-export default connect(null, mapDispatchToProps)(NavBar)
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
