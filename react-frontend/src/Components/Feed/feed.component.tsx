@@ -4,15 +4,45 @@ import heart from '../../Assets/heart.svg'
 import speechBubble from '../../Assets/speech-bubble.svg'
 import share from '../../Assets/share.svg'
 import bookmark from '../../Assets/bookmark.svg'
+import { Menu, Comment, Dropdown, Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 
 import './feed.styles.scss'
 
+enum FeedActions {
+    A,
+    B,
+    C,
+    D,
+}
+
 const Feed = (props: any) => {
+    const addComment = (content: String) => {}
+
+    const menu = (
+        <Menu>
+            <Menu.Item key={FeedActions.A}>
+                Go to post
+            </Menu.Item>
+            <Menu.Item key={FeedActions.B}>
+                Copy link
+            </Menu.Item>
+            <Menu.Item key={FeedActions.C}>
+                Delete post
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key={FeedActions.D}>Cancel</Menu.Item>
+        </Menu>
+    )
+
     return (
         <div className="feedComponent">
             <div className="header">
                 <h4>{props.user}</h4>
-                <img src={threeDots} alt="" className="icon" style={{ height: '1rem' }} />
+
+                <Dropdown overlay={menu} trigger={['click']}>
+                    <img src={threeDots} alt="" className="icon" style={{ height: '1rem' }} />
+                </Dropdown>
             </div>
 
             <div className="image">
@@ -32,7 +62,9 @@ const Feed = (props: any) => {
 
             <div className="Liked-by"></div>
 
-            <div className="Comments">comments section here</div>
+            <div className="Comments">
+                <Comment content={props.commentContent} avatar={props.image} author={props.user} />
+            </div>
             <div className="line-separation"></div>
             <form className="Add-a-comment">
                 <textarea className="comment-input" placeholder="Add a comment..." />

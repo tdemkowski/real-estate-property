@@ -7,6 +7,9 @@ import axios from 'axios'
 import apiUrl from '../../config'
 
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
+import { connect } from 'react-redux'
+import { deleteCurrentUser } from '../../redux/user/user.action'
+import { UserState } from '../../redux/user/user.models'
 
 const Profile = (props: any) => {
     const [arr, setArr] = useState<string[]>([])

@@ -19,10 +19,13 @@
     border-bottom: solid;
     border-color: #dbdbdb;
     border-width: thin;
-
     position: sticky;
     top: 0;
     z-index: 100;
+
+    .headerLogo {
+        margin-top: 0.5rem;
+    }
 
     .heading-logo:active {
         color: #dbdbdb;

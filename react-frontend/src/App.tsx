@@ -10,7 +10,16 @@ import Explore from './Pages/Explore/explore.component'
 import PageNotAvailable from './Pages/PageNotAvailable/pageNotAvailable.component'
 import Profile from './Pages/Profile/profile.component'
 import GuardedRoute from './HighOrderComponents/guard-route.hoc'
-class App extends Component {
+import { connect } from 'react-redux'
+import { UserState, User } from './redux/user/user.models'
+import { setCurrentUser } from './redux/user/user.action'
+import { StoreState } from './redux/root-reducer'
+
+
+interface Props {
+    user: UserState
+}
+class App extends React.Component<Props> {
     render() {
         return (
             <div className="App">
@@ -29,8 +38,11 @@ class App extends Component {
                     <Route path="/notFoundTest">
                         <PageNotAvailable />
                     </Route>
-                    <GuardedRoute path="/profile" auth={false} component={Profile}/>
+                    {this.props.user.currentUser ? <Route path="/profile" auth={true} component={Profile}/> : <GuardedRoute path="/profile" auth={false} component={Profile}/>}
+                    
                     <SignUp></SignUp>
+
+                    <Route exact path="/:username" component={Profile}></Route>
 
                 </Switch>
             </div>
@@ -38,4 +50,12 @@ class App extends Component {
     }
 }
 
-export default App
+const mapStateToProps = (state: any) => ({
+    user: state.user,
+})
+
+const mapDispatchToProps = (dispatch: any) => ({ setCurrentUser: (user: User) => dispatch(setCurrentUser(user)) })
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+

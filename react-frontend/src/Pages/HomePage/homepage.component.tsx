@@ -75,10 +75,10 @@ const Homepage = () => {
                       ))
                     : null}
                 <div className="feedSection">
-                    <Feed user="Person1" image={sampleImage_1} />
+                    <Feed user="Person1" image={sampleImage_1} commentContent="This is my favorite post omg wow blabla!" />
                 </div>
                 <div className="feedSection">
-                    <Feed user="Person2" image={sampleImage_2} />
+                    <Feed user="Person2" image={sampleImage_2} commentContent="Hey travis, what would like for Christmas. Give least four options gogo" />
                 </div>
             </div>
             <div className="HomePageSide">

@@ -34,8 +34,6 @@ interface Props {
 }
 
 const NavBar = (props: Props) => {
-    console.log('cough')
-    console.log(props.user)
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
     const [profileDropdown, setProfileDropdown] = useState(false)
@@ -85,11 +83,9 @@ const NavBar = (props: Props) => {
         <div className="navigationComponent">
             <div className="nav">
                 <div className="headerLogo">
-                    <div className="headerLogo-Header">
-                        <Link to="/" style={noTextDecoration}>
-                            <h3 className="heading-logo">Instagram</h3>
-                        </Link>
-                    </div>
+                    <Link to="/" style={noTextDecoration}>
+                        <h3 className="heading-logo">Instagram</h3>
+                    </Link>
                 </div>
 
                 <div className="searchBox">
@@ -131,7 +127,7 @@ const NavBar = (props: Props) => {
 
                         <img alt="camera.png" src={camera} className="icon" />
 
-                        <Dropdown overlay={menu}>
+                        <Dropdown overlay={menu} trigger={['click']}>
                             <Avatar
                                 size="large"
                                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
