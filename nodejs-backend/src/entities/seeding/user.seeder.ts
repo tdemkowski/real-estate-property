@@ -13,7 +13,7 @@ export default class CreateUsers implements Seeder {
                 user.posts = posts
                 return user
             })
-            .createMany(20)
+            .createMany(3)
 
         // admin account
         await factory(User)().create({
