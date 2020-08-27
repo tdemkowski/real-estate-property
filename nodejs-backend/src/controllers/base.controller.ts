@@ -16,13 +16,12 @@ class BaseController<T extends BaseEntity, DTO> {
     }
 
     protected initializeRoutes() {
-        this.router.get(this.path + '/:id', authMiddleware, this.GetById)
+        // this.router.get(this.path + '/:id', authMiddleware, this.GetById)
+        this.router.get(this.path + '/:id', this.GetById)
         this.router.post(this.path, authMiddleware, this.Create)
         this.router.put(this.path + '/:id', authMiddleware, this.Update)
         this.router.delete(this.path + '/:id', authMiddleware, this.Delete)
         this.router.get(this.path, authMiddleware, this.FetchAll)
-
-        //this.router.get(this.path + '/users/:username', authMiddleware, this.GetByUsername)
     }
 
     protected FetchAll = async (_req: Request, res: Response, next: NextFunction) => {

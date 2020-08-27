@@ -4,6 +4,7 @@ import BaseController from './base.controller'
 import { User } from '../entities/user.entity'
 import { Router } from 'express'
 import NotFoundException from './exceptions/NotFound.exception'
+
 class UserController extends BaseController<User, UserDTO> {
     public path = '/user'
     public router = Router()
@@ -20,6 +21,7 @@ class UserController extends BaseController<User, UserDTO> {
 
     public GetById = async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id
+        console.log(id)
         const user = await this.service.FindOne(id, {
             relations: ['posts'],
         })

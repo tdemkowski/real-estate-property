@@ -42,7 +42,8 @@ class CommentController extends BaseController<Comment, CommentDTO> {
 
 export interface CommentDTO {
     userId: string
-    text: number
+    avatar: string
+    text: string
 }
 
 export default CommentController

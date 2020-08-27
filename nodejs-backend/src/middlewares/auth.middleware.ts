@@ -3,9 +3,9 @@ import * as jwt from 'jsonwebtoken'
 import UnauthorizedException from '../controllers/exceptions/Unauthorized.exception'
 
 function authMiddleware(request: any, _response: Response, next: NextFunction) {
-    const token = request.get('Authorization').replace('Bearer ', '');
+    const token = request.get('Authorization').replace('Bearer ', '')
     let decoded
-    
+
     if (token) {
         try {
             decoded = jwt.verify(token, 'superdupersecretsecret')
