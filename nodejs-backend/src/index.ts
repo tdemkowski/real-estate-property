@@ -7,6 +7,7 @@ import { createConnection } from 'typeorm'
 import bodyParser = require('body-parser')
 import { Application } from 'express'
 import errorMiddleware from './middlewares/error.middleware'
+import PostController from './controllers/post.controller'
 
 class App {
     public app: Application
@@ -57,7 +58,6 @@ class App {
 }
 
 createConnection().then(() => {
-    const app = new App([new PostController(), new UserController(), new AuthController()], 3002)
-
+    const app = new App([new UserController(), new AuthController(), new PostController()], 3002)
     app.listen()
 })
