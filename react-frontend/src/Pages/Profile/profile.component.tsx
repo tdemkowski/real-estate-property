@@ -69,8 +69,8 @@ const Profile = (props: any) => {
 
                     <div className="profileHeader-info-details">
                         <p className="font fontThick">Title here or something</p>
-                        <p className="font">Here is my bio blablabla yes no yes no asdlkj </p>
-                        <Link to="https://cobratate.com/" className="fontThick darkBlue">
+                        <p className="font">Here is my bio blablabla yes no yes no asdkj </p>
+                        <Link to="https://cobratate.com/" className="fontThick darkBlue">s f
                             cobratate.com
                         </Link>
                     </div>

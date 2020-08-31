@@ -10,28 +10,29 @@ import { UserOutlined } from '@ant-design/icons'
 import './feed.styles.scss'
 
 enum FeedActions {
-    A,
-    B,
-    C,
-    D,
+    post,
+    copy,
+    link,
+    cancel,
 }
 
 const Feed = (props: any) => {
-    const addComment = (content: String) => {}
+
+    const addComment = (content: String) => {} // requires user authentication
 
     const menu = (
         <Menu>
-            <Menu.Item key={FeedActions.A}>
+            <Menu.Item key={FeedActions.post}>
                 Go to post
             </Menu.Item>
-            <Menu.Item key={FeedActions.B}>
+            <Menu.Item key={FeedActions.copy}>
                 Copy link
             </Menu.Item>
-            <Menu.Item key={FeedActions.C}>
+            <Menu.Item key={FeedActions.link}>
                 Delete post
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item key={FeedActions.D}>Cancel</Menu.Item>
+            <Menu.Item key={FeedActions.cancel}>Cancel</Menu.Item>
         </Menu>
     )
 

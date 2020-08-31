@@ -6,34 +6,33 @@ import axios from 'axios'
 import './homepage.styles.scss'
 import Suggestion from '../../Components/Suggestions/suggestion.component'
 import User from '../../Components/Suggestions/User/user.component'
-
-import sampleImage_1 from './RemoveLater/carbonDating.png'
-import sampleImage_2 from './RemoveLater/chungus.jpg'
 import apiUrl from '../../config'
 
 interface Post {
     imageUrl: string
     id: string
+    text: string
 }
 
 const Homepage = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [user, setUser] = useState<{ username: string }>()
+
     useEffect(() => {
         document.title = 'Instagram'
-        // axios
-        //     .get(`${apiUrl}user/3376a019-c2ef-4539-bbfe-0ef35d4c045d`, {
-        //         headers: {
-        //             Authorization: `Bearer ${localStorage.getItem('token')}`,
-        //         },
-        //     })
-        //     .then((res) => {
-        //         console.log(res)
-        //         setPosts(res.data.posts)
-        //         const { username } = res.data
-        //         setUser({ username })
-        //         //setPosts(res.);
-        //     })
+        axios
+            .get(`${apiUrl}p`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((res) => {
+                console.log(res)
+                setPosts(res.data.response.items)
+                const username = "insert username here"
+                setUser({ username })
+                //setPosts(res.);
+            })
     }, [1])
 
     // remove later:
@@ -60,6 +59,7 @@ const Homepage = () => {
             'https://i.guim.co.uk/img/media/788dbbce44c1846fab9da460f64d23d02754a143/362_0_776_1626/master/776.jpg?width=700&quality=85&auto=format&fit=max&s=1e9a8ef81695378d74053e1767f3fc8d',
         id: 3,
     }
+    //<Comment content={props.commentContent} avatar={props.image} author={props.user} />
 
     return (
         <div className="HomePageComponent">
@@ -70,16 +70,10 @@ const Homepage = () => {
                 {posts.length && user
                     ? posts.map((item, i) => (
                           <div key={i} className="feedSection">
-                              <Feed user={user.username} image={item.imageUrl} />
+                              <Feed user={user.username} image={item.imageUrl} commentContent={item.text} />
                           </div>
                       ))
                     : null}
-                <div className="feedSection">
-                    <Feed user="Person1" image={sampleImage_1} commentContent="This is my favorite post omg wow blabla!" />
-                </div>
-                <div className="feedSection">
-                    <Feed user="Person2" image={sampleImage_2} commentContent="Hey travis, what would like for Christmas. Give least four options gogo" />
-                </div>
             </div>
             <div className="HomePageSide">
                 <User

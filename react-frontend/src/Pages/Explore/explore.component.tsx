@@ -5,7 +5,6 @@ import './explore.styles.scss'
 import apiUrl from '../../config'
 
 const Explore = (props: any) => {
-    console.log("HELLO");
     const [arr, setArr] = useState<string[]>([])
 
     useEffect(() => {
