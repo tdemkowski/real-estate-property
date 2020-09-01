@@ -18,6 +18,7 @@ class PostController extends BaseController<Post, PostDTO> {
     public initializeRoutes() {
         // register any other routes here
         super.initializeRoutes()
+        this.router.get(this.path + '/:id', this.GetById)
     }
 
     public GetById = async (req: Request, res: Response, next: NextFunction) => {
