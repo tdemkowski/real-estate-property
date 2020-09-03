@@ -6,6 +6,9 @@ import axios from 'axios'
 import './homepage.styles.scss'
 import Suggestion from '../../Components/Suggestions/suggestion.component'
 import User from '../../Components/Suggestions/User/user.component'
+import InfiniteScroll from 'react-infinite-scroller'
+import PropTypes from 'prop-types'
+
 import apiUrl from '../../config'
 
 interface Post {
@@ -17,23 +20,33 @@ interface Post {
 const Homepage = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [user, setUser] = useState<{ username: string }>()
+    const [hasMore, setHasMore] = useState(true)
+
+    const propTypes = {
+        articles: PropTypes.object.isRequired,
+        pagination: PropTypes.object.isRequired
+    }
 
     useEffect(() => {
         document.title = 'Instagram'
         axios
-            .get(`${apiUrl}p`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            })
-            .then((res) => {
-                console.log(res)
-                setPosts(res.data.response.items)
-                const username = "insert username here"
-                setUser({ username })
-                //setPosts(res.);
-            })
+        .get(`${apiUrl}p`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+        .then((res) => {
+            console.log(res)
+            setPosts(res.data.response.items)
+            const username = "insert username here"
+            setUser({ username })
+            //setPosts(res.);
+        })
     }, [1])
+
+    const loadItems = (numberOfItems: any) => {
+
+    }
 
     // remove later:
     const sampleSuggestionObject = {
@@ -61,6 +74,15 @@ const Homepage = () => {
     }
     //<Comment content={props.commentContent} avatar={props.image} author={props.user} />
 
+    let items: any[] = []
+    posts.map((item, i) => 
+        items.push(
+            <div key={i} className="feedSection">
+                <Feed user={"username here"} image={item.imageUrl} commentContent={item.text} />
+            </div>
+        )
+    )
+
     return (
         <div className="HomePageComponent">
             <div className="HomePageMain">
@@ -74,6 +96,13 @@ const Homepage = () => {
                           </div>
                       ))
                     : null}
+                {/* <InfiniteScroll
+                    pageStart={0}
+                    loadMore={true}
+                    hasMore={true || false}
+                    loader={<div className="loader">Loading ...</div>}>
+                {items}
+                </InfiniteScroll> */}
             </div>
             <div className="HomePageSide">
                 <User

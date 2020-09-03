@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 import { UserState, User } from './redux/user/user.models'
 import { setCurrentUser } from './redux/user/user.action'
 import { StoreState } from './redux/root-reducer'
+import Post from './Pages/Post/post.component'
 
 
 interface Props {
@@ -31,18 +32,23 @@ class App extends React.Component<Props> {
                     <Route path="/explore">
                         <Explore />
                     </Route>
+                    
+                    
 
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/sign-up" component={SignUp} />
+
 
                     <Route path="/notFoundTest">
                         <PageNotAvailable />
                     </Route>
                     {this.props.user.currentUser ? <Route path="/profile" auth={true} component={Profile}/> : <GuardedRoute path="/profile" auth={false} component={Profile}/>}
                     
-                    <SignUp></SignUp>
+
 
                     <Route exact path="/:username" component={Profile}></Route>
+
+                    <Route exact path="/p/:postId" component={(routerProps: { match: { params: { postId: any } } }) => <Post postId={routerProps.match.params.postId} />}></Route>
 
                 </Switch>
             </div>

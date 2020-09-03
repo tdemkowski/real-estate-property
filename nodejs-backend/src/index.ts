@@ -7,7 +7,6 @@ import { createConnection } from 'typeorm'
 import bodyParser = require('body-parser')
 import { Application } from 'express'
 import errorMiddleware from './middlewares/error.middleware'
-import PostController from './controllers/post.controller'
 
 class App {
     public app: Application

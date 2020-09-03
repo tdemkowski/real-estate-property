@@ -16,7 +16,7 @@ class BaseController<T extends BaseEntity, DTO> {
     }
 
     protected initializeRoutes() {
-        // this.router.get(this.path + '/:id', authMiddleware, this.GetById)
+        // this.router.get(this.path + '/:id', this.GetById)
         this.router.get(this.path + '/:id', authMiddleware, this.GetById)
         this.router.post(this.path, authMiddleware, this.Create)
         this.router.put(this.path + '/:id', authMiddleware, this.Update)
