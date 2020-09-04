@@ -10,6 +10,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import PropTypes from 'prop-types'
 
 import apiUrl from '../../config'
+import { useLocation } from 'react-router-dom'
 
 interface Post {
     imageUrl: string
@@ -21,6 +22,7 @@ const Homepage = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [user, setUser] = useState<{ username: string }>()
     const [hasMore, setHasMore] = useState(true)
+    const path = useLocation()
 
     const propTypes = {
         articles: PropTypes.object.isRequired,
@@ -78,7 +80,7 @@ const Homepage = () => {
     posts.map((item, i) => 
         items.push(
             <div key={i} className="feedSection">
-                <Feed user={"username here"} image={item.imageUrl} commentContent={item.text} />
+                <Feed id={item.id} user={"username here"} image={item.imageUrl} commentContent={item.text} />
             </div>
         )
     )
@@ -92,7 +94,7 @@ const Homepage = () => {
                 {posts.length && user
                     ? posts.map((item, i) => (
                           <div key={i} className="feedSection">
-                              <Feed user={user.username} image={item.imageUrl} commentContent={item.text} />
+                              <Feed user={user.username} image={item.imageUrl} commentContent={item.text} id={item.id} path={path.pathname} />
                           </div>
                       ))
                     : null}

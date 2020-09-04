@@ -6,8 +6,8 @@ import share from '../../Assets/share.svg'
 import bookmark from '../../Assets/bookmark.svg'
 import { Menu, Comment, Dropdown, Avatar } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-
 import './feed.styles.scss'
+import { useLocation } from 'react-router-dom'
 
 enum FeedActions {
     post,
@@ -27,19 +27,33 @@ const Feed = (props: any) => {
 
     const menu = (
         <Menu>
-            <Menu.Item key={FeedActions.post}>Go to post</Menu.Item>
-            <Menu.Item key={FeedActions.copy}>Copy link</Menu.Item>
-            <Menu.Item key={FeedActions.link}>Delete post</Menu.Item>
+            <Menu.Item key={FeedActions.post}>
+                <a href={'/p/' + props.id}>
+                    Go to post
+                </a>
+            </Menu.Item>
+            <Menu.Item key={FeedActions.copy} onClick={() => navigator.clipboard.writeText(props.path + 'p/' + props.id)}>
+                Copy link
+            </Menu.Item>
+            <Menu.Item danger key={FeedActions.link}>
+                Delete post
+            </Menu.Item>
             <Menu.Divider />
-            <Menu.Item key={FeedActions.cancel}>Cancel</Menu.Item>
+            <Menu.Item key={FeedActions.cancel}>
+                Cancel
+            </Menu.Item>
         </Menu>
     )
 
     const menuPost = (
         <Menu>
-            <Menu.Item key={PostActions.Unfollow}>Unfollow</Menu.Item>
+            <Menu.Item danger key={PostActions.Unfollow}>
+                Unfollow
+            </Menu.Item>
             <Menu.Divider />
-            <Menu.Item key={PostActions.cancel}>Cancel</Menu.Item>
+            <Menu.Item key={PostActions.cancel}>
+                Cancel
+            </Menu.Item>
         </Menu>
     )
 
