@@ -3,7 +3,6 @@
     flex-direction: row;
     justify-content: center;
     margin-right: 20rem;
-    
     .storySection {
         display: flex;
         flex-direction: row;
@@ -13,12 +12,11 @@
     .feedSection {
         display: flex;
         justify-content: center;
-        
     }
 
     .HomePageSide {
         position: fixed;
-        right: 20rem;
+        left: calc(50vw + 475px - 20rem);
         margin-top: 5rem;
         margin-left: 2rem;
     }

@@ -5,6 +5,8 @@ import { Router } from 'express'
 import NotFoundException from './exceptions/NotFound.exception'
 import { Post } from '../entities/post.entity'
 import { User } from '../entities/user.entity'
+import OKSuccess from './success/OK.success'
+import BadRequest from './exceptions/BadRequest.exception'
 
 class PostController extends BaseController<Post, PostDTO> {
     public path = '/p'
@@ -20,6 +22,15 @@ class PostController extends BaseController<Post, PostDTO> {
         this.router.get(this.path + '/:id', this.GetById)
         this.router.get(this.path, this.FetchAll)
         super.initializeRoutes()
+    }
+
+    public FetchAll = async (_req: Request, res: Response, next: NextFunction) => {
+        const findAll = await this.service.FindAll({relations: ['user']})
+        if (findAll) {
+            next(new OKSuccess(res, { response: findAll }))
+        } else {
+            next(new BadRequest(findAll))
+        }
     }
 
     public GetById = async (req: Request, res: Response, next: NextFunction) => {

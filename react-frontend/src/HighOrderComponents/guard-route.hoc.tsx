@@ -16,6 +16,4 @@ const GuardedRoute = ({auth, component: WrappedComponent, ...rest} : IProps) => 
 
 )
 
-   
-
 export default GuardedRoute;
