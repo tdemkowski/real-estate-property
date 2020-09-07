@@ -23,6 +23,7 @@ const Post = (props: any) => {
             setPost(res.data)
             setLoadedPost(true)
         })
+        .catch(err => console.warn(err))
     }, [1])
 
     return (

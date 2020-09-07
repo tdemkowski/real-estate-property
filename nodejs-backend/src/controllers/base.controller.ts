@@ -24,8 +24,10 @@ class BaseController<T extends BaseEntity, DTO> {
         this.router.get(this.path, authMiddleware, this.FetchAll)
     }
 
-    protected FetchAll = async (_req: Request, res: Response, next: NextFunction) => {
-        const findAll = await this.service.FindAll()
+    protected FetchAll = async (req: Request, res: Response, next: NextFunction) => {
+        const { take, skip } = req.query
+        const findAll = await this.service.FindAll({ take: Number(take), skip: Number(skip) })
+
         if (findAll) {
             next(new OKSuccess(res, { response: findAll }))
         } else {

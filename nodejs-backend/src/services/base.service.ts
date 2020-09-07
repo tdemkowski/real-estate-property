@@ -26,10 +26,16 @@ abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
     }
 
     public async FindAll(filter?: FindManyOptions<T>): Promise<IPagination<T>> {
-        const total = await this.repository.count(filter)
-        const items = await this.repository.find(filter)
+        const take = filter ? filter.take : 10
+        const skip = filter ? filter.skip : 0
+
+        const [result, total] = await this.repository.findAndCount({
+            take: take,
+            skip: skip,
+        })
+
         return {
-            items,
+            items: result,
             total,
         }
     }

@@ -34,6 +34,7 @@ interface Props {
 }
 
 const NavBar = (props: Props) => {
+    console.log(props.user.currentUser)
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
     const [profileDropdown, setProfileDropdown] = useState(false)

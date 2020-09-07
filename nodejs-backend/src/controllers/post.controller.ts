@@ -24,8 +24,10 @@ class PostController extends BaseController<Post, PostDTO> {
         super.initializeRoutes()
     }
 
-    public FetchAll = async (_req: Request, res: Response, next: NextFunction) => {
-        const findAll = await this.service.FindAll({relations: ['user']})
+    public FetchAll = async (req: Request, res: Response, next: NextFunction) => {
+        const { take, skip } = req.query
+        const findAll = await this.service.FindAll({ relations: ['user'], take: Number(take), skip: Number(skip) })
+        console.log(findAll)
         if (findAll) {
             next(new OKSuccess(res, { response: findAll }))
         } else {
@@ -35,7 +37,6 @@ class PostController extends BaseController<Post, PostDTO> {
 
     public GetById = async (req: Request, res: Response, next: NextFunction) => {
         const id = req.params.id
-        console.log(id)
         const post = await this.service.FindOne(id, {
             relations: ['user'],
         })

@@ -14,12 +14,12 @@ const Suggestion = (props: any) => {
             </div>
         )
     }
-    console.log(props)
+
     return (
         <div className="suggestionComponent">
             <h3 className="heading">Suggestions for you</h3>
             {props.fetchedUsers.map((obj: suggestType) =>
-                produceUserCard(obj.username, obj.fullName, obj.profilePictureUrl, obj.id),
+                produceUserCard(obj.username, obj.fullName, obj.profilePictureURL, obj.id),
             )}
         </div>
     )
@@ -28,7 +28,7 @@ const Suggestion = (props: any) => {
 export interface suggestType {
     username: string
     fullName: string
-    profilePictureUrl: string
+    profilePictureURL: string
     id: number | string
 }
 
