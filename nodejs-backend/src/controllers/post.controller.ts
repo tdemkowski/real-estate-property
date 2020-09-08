@@ -29,7 +29,7 @@ class PostController extends BaseController<Post, PostDTO> {
         const findAll = await this.service.FindAll({ relations: ['user'], take: Number(take), skip: Number(skip) })
         console.log(findAll)
         if (findAll) {
-            next(new OKSuccess(res, { response: findAll }))
+            new OKSuccess(res, { response: findAll })
         } else {
             next(new BadRequest(findAll))
         }

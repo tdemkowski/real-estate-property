@@ -30,6 +30,7 @@ abstract class BaseService<T extends BaseEntity> implements IBaseService<T> {
         const skip = filter ? filter.skip : 0
 
         const [result, total] = await this.repository.findAndCount({
+            ...filter,
             take: take,
             skip: skip,
         })
