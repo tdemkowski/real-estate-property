@@ -22,13 +22,11 @@
     }
 
     .loader {
-        width: 15rem;
+        width: 40rem;
         height: 15rem;
         display: flex;
         justify-content: center;
-    }
-
-    .icon {
-        
+        align-items: center;
+        margin-top: 2rem;
     }
 }

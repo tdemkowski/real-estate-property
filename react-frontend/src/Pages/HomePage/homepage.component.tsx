@@ -7,7 +7,6 @@ import './homepage.styles.scss'
 import Suggestion from '../../Components/Suggestions/suggestion.component'
 import User from '../../Components/Suggestions/User/user.component'
 import InfiniteScroll from 'react-infinite-scroller'
-
 import apiUrl from '../../config'
 import { useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -36,8 +35,8 @@ const Homepage = (props: Props) => {
     const [user, setUser] = useState<User>()
     const [hasMore, setHasMore] = useState(true)
     const [skip, setSkip] = useState(0)
-    const path = useLocation()
     const [recommended, setRecommended] = useState<User[]>([])
+    const path = useLocation()
 
     useEffect(() => {
         document.title = 'Instagram'
@@ -93,7 +92,7 @@ const Homepage = (props: Props) => {
     const loader = () => {
         return (
             <div className="loader">
-                <LoadingOutlined />
+                <LoadingOutlined style={{ fontSize: '3rem', color: '#dbdbdb' }} />
             </div>
         )
     }
@@ -117,7 +116,9 @@ const Homepage = (props: Props) => {
                           </div>
                       ))
                     : null}
-                <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()} />
+                <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
+                    {[]}
+                </InfiniteScroll>
             </div>
             {user ? (
                 <div className="HomePageSide">
