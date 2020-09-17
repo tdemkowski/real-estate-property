@@ -1,12 +1,12 @@
 import UserActionTypes from './user.types'
-import { User, UserState } from './user.models'
+import { IUser, UserState } from './user.models'
 import BaseAction from '../base-action.model'
 
 const INITIAL_STATE = {
     currentUser: null
 }
 
-export const userReducer = (state: UserState = INITIAL_STATE, action: BaseAction<UserActionTypes, User>) => {
+export const userReducer = (state: UserState = INITIAL_STATE, action: BaseAction<UserActionTypes, IUser>) => {
     switch (action.type) {
         case UserActionTypes.SetCurrentUser:
             return {

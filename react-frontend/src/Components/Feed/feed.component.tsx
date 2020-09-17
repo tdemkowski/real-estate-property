@@ -60,7 +60,7 @@ const Feed = (props: any) => {
     const headerSection = () => {
         return (
             <div className='header'>
-                <h4>{props.user}</h4>
+                <h4>{props.user.username}</h4>
                 <Dropdown overlay={displayAsPost ? menuPost : menu} trigger={['click']}>
                     <img src={threeDots} alt="" className="icon" style={{ height: '1rem' }} />
                 </Dropdown>
@@ -94,7 +94,7 @@ const Feed = (props: any) => {
                 <div className="Liked-by"></div>
 
                 <div className="Comments">
-                    <Comment className="comment" content={props.commentContent} avatar={props.image} author={props.user} />
+                    <Comment className="comment" content={props.commentContent} avatar={props.image} author={props.user.username} />
                 </div>
 
                 <div className="line-separation"></div>

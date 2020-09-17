@@ -1,8 +1,8 @@
 import UserActionTypes from './user.types'
-import { User } from './user.models'
+import { IUser } from './user.models'
 import BaseAction from '../base-action.model'
 
-export const setCurrentUser = (user: User): BaseAction<UserActionTypes, User> => ({
+export const setCurrentUser = (user: IUser): BaseAction<UserActionTypes, IUser> => ({
     type: UserActionTypes.SetCurrentUser,
     payload: user,
 })

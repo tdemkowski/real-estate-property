@@ -3,7 +3,7 @@ import React from 'react'
 import './user.styles.scss'
 import { Link } from 'react-router-dom'
 
-const User = (props: any) => {
+const UserComponent = (props: any) => {
     const mainUserStyle = {
         height: '4.5rem',
         width: '4.5rem',
@@ -24,4 +24,4 @@ const User = (props: any) => {
     )
 }
 
-export default User
+export default UserComponent

@@ -5,13 +5,13 @@ import './signin.styles.scss'
 import Axios from 'axios'
 import apiUrl from '../../config'
 import { setCurrentUser } from '../../redux/user/user.action'
-import { User } from '../../redux/user/user.models'
+import { IUser } from '../../redux/user/user.models'
 import { connect } from 'react-redux'
 import BaseAction from '../../redux/base-action.model'
 import UserActionTypes from '../../redux/user/user.types'
 
 interface Props {
-    setCurrentUser(user: User): BaseAction<UserActionTypes, User>
+    setCurrentUser(user: IUser): BaseAction<UserActionTypes, IUser>
 }
 const SignIn = (props: Props) => {
     const [userOrEmail, setUserOrEmail] = useState('')
@@ -136,6 +136,6 @@ const mapStateToProps = (state: any) => ({
     user: state.user,
 })
 
-const mapDispatchToProps = (dispatch: any) => ({ setCurrentUser: (user: User) => dispatch(setCurrentUser(user)) })
+const mapDispatchToProps = (dispatch: any) => ({ setCurrentUser: (user: IUser) => dispatch(setCurrentUser(user)) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
