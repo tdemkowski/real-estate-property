@@ -68,7 +68,6 @@ const Homepage = (props: Props) => {
 
     const loadItems = () => {
         // make loading bar appear here before we start fetching requests
-        debugger
         setTimeout(() => {
             axios
                 .get(`${apiUrl}p?take=3&skip=${skip}`, {
