@@ -5,12 +5,12 @@ import Stories from '../../Components/Stories/stories.component'
 import axios from 'axios'
 import './homepage.styles.scss'
 import Suggestion from '../../Components/Suggestions/suggestion.component'
-import User from '../../Components/Suggestions/User/user.component'
+import UserComponent from '../../Components/Suggestions/User/user.component'
 import InfiniteScroll from 'react-infinite-scroller'
 import apiUrl from '../../config'
 import { useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { UserState } from '../../redux/user/user.models'
+import { UserState, IUser } from '../../redux/user/user.models'
 import { LoadingOutlined } from '@ant-design/icons'
 
 const NUMBER_OF_ITEMS_PER_PAGE = 3
@@ -18,12 +18,7 @@ interface Post {
     imageUrl: string
     id: string
     text: string
-}
-
-interface User {
-    username: string
-    fullName: string
-    imageUrl: string
+    user?: IUser
 }
 
 interface Props {
@@ -32,10 +27,10 @@ interface Props {
 
 const Homepage = (props: Props) => {
     const [posts, setPosts] = useState<Post[]>([])
-    const [user, setUser] = useState<User>()
+    const [user, setUser] = useState<IUser>()
     const [hasMore, setHasMore] = useState(true)
     const [skip, setSkip] = useState(0)
-    const [recommended, setRecommended] = useState<User[]>([])
+    const [recommended, setRecommended] = useState<IUser[]>([])
     const path = useLocation()
 
     useEffect(() => {
@@ -71,9 +66,9 @@ const Homepage = (props: Props) => {
             })
     }
 
-    const loadItems = (numberOfItems: any) => {
+    const loadItems = () => {
         // make loading bar appear here before we start fetching requests
-
+        debugger
         setTimeout(() => {
             axios
                 .get(`${apiUrl}p?take=3&skip=${skip}`, {
@@ -103,26 +98,24 @@ const Homepage = (props: Props) => {
                 <div className="storySection">
                     <Stories />
                 </div>
-                {posts.length
-                    ? posts.map((item, i) => (
-                          <div key={i} className="feedSection">
-                              <Feed
-                                  user={'user'}
-                                  image={item.imageUrl}
-                                  commentContent={item.text}
-                                  id={item.id}
-                                  path={path.pathname}
-                              />
-                          </div>
-                      ))
-                    : null}
+                
                 <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
-                    {[]}
+                    {posts.map((item, i) => (
+                        <div key={i} className="feedSection">
+                            <Feed
+                                user={item.user}
+                                image={item.imageUrl}
+                                commentContent={item.text}
+                                id={item.id}
+                                path={path.pathname}
+                            />
+                        </div>
+                    ))}
                 </InfiniteScroll>
             </div>
             {user ? (
                 <div className="HomePageSide">
-                    <User
+                    <UserComponent
                         username={user.username}
                         fullName={user.fullName}
                         profilePictureUrl={user.imageUrl}
