@@ -35,7 +35,6 @@ const Homepage = (props: Props) => {
 
     useEffect(() => {
         document.title = 'Instagram'
-        console.log(props.user.currentUser)
         if (props.user.currentUser) {
             loadUserInfo()
             loadRecommended()

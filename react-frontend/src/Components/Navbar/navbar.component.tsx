@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import './navbar.styles.scss'
 
@@ -34,7 +34,6 @@ interface Props {
 }
 
 const NavBar = (props: Props) => {
-    console.log(props.user.currentUser)
     const [searching, setSearching] = useState(false)
     const [viewActivity, setViewActivity] = useState(false)
     const [profileDropdown, setProfileDropdown] = useState(false)
@@ -60,6 +59,7 @@ const NavBar = (props: Props) => {
     const handleMenuClick = (e: any) => {
         if (+e.key === MenuActions.logOut) {
             message.error('LOGOUT')
+            localStorage.setItem('token', '');
             props.deleteCurrentUser()
         }
     }
