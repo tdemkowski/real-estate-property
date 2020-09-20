@@ -56,10 +56,10 @@ class App extends React.Component<Props> {
                         <PageNotAvailable />
                     </Route>
                     {this.props.user.currentUser ? <Route path="/profile" auth={true} component={Profile}/> : <GuardedRoute path="/profile" auth={false} component={Profile}/>}
-                    
 
+                    {/* <Route exact path="/:username" component={Profile}></Route> */}
 
-                    <Route exact path="/:username" component={Profile}></Route>
+                    <Route exact path="/:username" component={(routerProps: { match: { params: { username: any } } }) => <Profile username={routerProps.match.params.username} />}></Route>
 
                     <Route exact path="/p/:postId" component={(routerProps: { match: { params: { postId: any } } }) => <Post postId={routerProps.match.params.postId} />}></Route>
 
