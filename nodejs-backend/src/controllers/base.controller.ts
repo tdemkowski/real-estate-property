@@ -30,7 +30,7 @@ class BaseController<T extends BaseEntity, DTO> {
         const findAll = await this.service.FindAll({ take: Number(take), skip: Number(skip) })
 
         if (findAll) {
-            next(new OKSuccess(res, { response: findAll }))
+            new OKSuccess(res, { response: findAll })
         } else {
             next(new BadRequest(findAll))
         }
@@ -40,7 +40,7 @@ class BaseController<T extends BaseEntity, DTO> {
         const body = req.body as DTO
         if (body) {
             const insert = await this.service.Create(body)
-            next(new CreatedSuccess(res, { body: insert }))
+            new CreatedSuccess(res, { body: insert })
         } else {
             next(new BadRequest('Object created'))
         }
@@ -61,7 +61,7 @@ class BaseController<T extends BaseEntity, DTO> {
         const id = req.params.id
         if (id) {
             await this.service.Delete(id)
-            next(new NoContentSuccess(id))
+            new NoContentSuccess(id)
         } else {
             next(new NotFoundException(id))
         }
@@ -71,7 +71,7 @@ class BaseController<T extends BaseEntity, DTO> {
         const id = req.params.id
         const obj = await this.service.FindOne(id)
         if (obj) {
-            next(new OKSuccess(res, obj))
+            new OKSuccess(res, obj)
         } else {
             next(new NotFoundException(id))
         }
@@ -81,7 +81,7 @@ class BaseController<T extends BaseEntity, DTO> {
         console.log(req.params.username)
         const obj = await this.service.FindOne({ where: { username: req.params.username } })
         if (obj) {
-            next(new OKSuccess(res, obj))
+            new OKSuccess(res, obj)
         } else {
             next(new NotFoundException(req.params.username))
         }
