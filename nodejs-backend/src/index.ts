@@ -7,6 +7,7 @@ import { createConnection } from 'typeorm'
 import bodyParser = require('body-parser')
 import { Application } from 'express'
 import errorMiddleware from './middlewares/error.middleware'
+import cors from 'cors'
 
 class App {
     public app: Application
@@ -41,7 +42,7 @@ class App {
 
     private initializeControllers(controllers): void {
         controllers.forEach((controller) => {
-            this.app.use(this.basePath, controller.router)
+            this.app.use(this.basePath, controller.router, cors())
         })
     }
 

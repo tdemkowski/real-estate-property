@@ -81,7 +81,7 @@ class BaseController<T extends BaseEntity, DTO> {
         console.log(req.params.username)
         const obj = await this.service.FindOne({ where: { username: req.params.username } })
         if (obj) {
-            new OKSuccess(res, obj)
+            next(new OKSuccess(res, obj))
         } else {
             next(new NotFoundException(req.params.username))
         }

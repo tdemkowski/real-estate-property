@@ -43,20 +43,17 @@ const Profile = (props: any) => {
     useEffect(() => {
         document.title = props.username
 
-        if (!userData) {
-            axios
-                .get(`${apiUrl}u/${props.username}`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                })
-                .then((user) => {
-                    setUserData(user.data)
-                })
-                .catch((err) => console.log(err))
-        } else {
-            console.log(userData)
-        }
+        axios
+            .get(`${apiUrl}u/${props.username}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((user) => {
+                setUserData(user.data)
+                console.log(user.data)
+            })
+            .catch((err) => console.log(err))
     })
 
     const loadItems = () => {
@@ -135,16 +132,7 @@ const Profile = (props: any) => {
             </div>
             <div className="profileImagesSection">
                 <div className="profileImages">
-                    {/* {arr
-                        ? arr.map((url) => {
-                              return (
-                                  <div key={Math.random()} className="previewedImageWrapper">
-                                      <img className="previewedImage" src={url} alt="User Post" />
-                                  </div>
-                              )
-                          })
-                        : null} */}
-                    <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
+                    {/* <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
                         {posts.map((item, i) => (
                             <div key={i} className="feedSection">
                                 <Feed
@@ -155,7 +143,7 @@ const Profile = (props: any) => {
                                 />
                             </div>
                         ))}
-                    </InfiniteScroll>
+                    </InfiniteScroll> */}
                 </div>
             </div>
         </div>
