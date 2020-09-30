@@ -25,23 +25,11 @@ class UserController extends BaseController<User, UserDTO> {
         const { take } = req.query
         const findAll = await this.service.FindAll({ take: Number(take) })
         if (findAll) {
-            next(new OKSuccess(res, { response: findAll }))
+            new OKSuccess(res, { response: findAll })
         } else {
             next(new BadRequest(findAll))
         }
     }
-
-    // public GetById = async (req: Request, res: Response, next: NextFunction) => {
-    //     const id = req.params.id
-    //     const user = await this.service.FindOne(id, {
-    //         relations: ['posts'],
-    //     })
-    //     if (user) {
-    //         res.send(user)
-    //     } else {
-    //         next(new NotFoundException(id))
-    //     }
-    // }
 }
 export interface UserDTO {
     username: string

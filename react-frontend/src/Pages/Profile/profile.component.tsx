@@ -1,51 +1,95 @@
 import React, { useEffect, useState } from 'react'
-
 import './profile.styles.scss'
 import { Link } from 'react-router-dom'
 import settingsIcon from '../../Assets/settings.svg'
 import axios from 'axios'
 import apiUrl from '../../config'
-
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
 import { connect } from 'react-redux'
 import { deleteCurrentUser } from '../../redux/user/user.action'
-import { UserState } from '../../redux/user/user.models'
+import { IUser, UserState } from '../../redux/user/user.models'
+import InfiniteScroll from 'react-infinite-scroller'
+import Feed from '../../Components/Feed/feed.component'
+import { LoadingOutlined } from '@ant-design/icons'
+
+const NUMBER_OF_ITEMS_PER_PAGE = 9
+
+interface Post {
+    imageUrl: string
+    id: string
+    text: string
+    user?: IUser
+}
+
+interface tempUser {
+    age: Number
+    createdAt: String
+    email: String
+    fullName: String
+    id: String
+    profilePictureURL: String
+    updatedAt: String
+    username: String
+}
 
 const Profile = (props: any) => {
+    const [posts, setPosts] = useState<Post[]>([])
+    const [skip, setSkip] = useState(0)
+    const [postsLoaded, setPostsLoaded] = useState(0)
+    const [hasMore, setHasMore] = useState(true)
     const [arr, setArr] = useState<string[]>([])
+    const [userData, setUserData] = useState<tempUser>()
 
     useEffect(() => {
-        document.title = 'insert username'
+        document.title = props.username
+
+        axios
+            .get(`${apiUrl}u/${props.username}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((user) => {
+                setUserData(user.data)
+                console.log(user.data)
+            })
+            .catch((err) => console.log(err))
     })
 
-    if (arr.length === 0) {
-        // axios
-        //     .get(`${apiUrl}user/9e849201-78ff-4945-940b-74396b234fa7`, {
-        //         headers: {
-        //             Authorization: `Bearer ${localStorage.getItem('token')}`,
-        //         },
-        //     })
-        //     .then((res) => {
-        //         const tmp: string[] = []
-        //         for (let i = 0; i < 12; i++) {
-        //             tmp.push(res.data.posts[i].imageUrl)
-        //         }
-        //         if (arr !== tmp) {
-        //             setArr(tmp)
-        //         }
-        //     })
-        //     .catch((error) => console.log(error))
+    const loadItems = () => {
+        setTimeout(() => {
+            axios
+                .get(`${apiUrl}p?take=3&skip=${skip}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                })
+                .then((res) => {
+                    setPosts([...posts, ...res.data.response.items])
+                    setSkip(skip + NUMBER_OF_ITEMS_PER_PAGE)
+                    setPostsLoaded(postsLoaded + 3)
+                    setHasMore(false)
+                    if (postsLoaded >= res.data.total) setHasMore(false)
+                })
+        }, 1000)
     }
-    console.log(arr)
 
-    return (
-        <div className="profileComponent">
+    const loader = () => {
+        return (
+            <div className="loader">
+                <LoadingOutlined style={{ fontSize: '3rem', color: '#dbdbdb' }} />
+            </div>
+        )
+    }
+
+    const loadHeader = () => {
+        return (
             <div className="profileHeader">
                 <img className="profilePicture" src={profPic1} alt="" />
 
                 <div className="profileHeader-info">
                     <div className="profileHeader-info-buttons">
-                        <h1 className="font fontThin">username</h1>
+                        <h1 className="font fontThin">{userData?.username}</h1>
                         <Link to="/settings/edit" className="buttonLink">
                             <button className="button font">Edit Profile</button>
                             <img className="icon" src={settingsIcon} alt="" />
@@ -70,28 +114,36 @@ const Profile = (props: any) => {
                     <div className="profileHeader-info-details">
                         <p className="font fontThick">Title here or something</p>
                         <p className="font">Here is my bio blablabla yes no yes no asdkj </p>
-                        <Link to="https://cobratate.com/" className="fontThick darkBlue">s f
-                            cobratate.com
+                        <Link to="https://cobratate.com/" className="fontThick darkBlue">
+                            s f cobratate.com
                         </Link>
                     </div>
                 </div>
             </div>
+        )
+    }
 
+    return (
+        <div className="profileComponent">
+            {userData ? loadHeader() : null}
             <div className="profileCategories">
                 <div className="category font">POSTS</div>
                 <div className="category font">TAGGED</div>
             </div>
             <div className="profileImagesSection">
                 <div className="profileImages">
-                    {arr
-                        ? arr.map((url) => {
-                              return (
-                                  <div key={Math.random()} className="previewedImageWrapper">
-                                      <img className="previewedImage" src={url} alt="User Post" />
-                                  </div>
-                              )
-                          })
-                        : null}
+                    {/* <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
+                        {posts.map((item, i) => (
+                            <div key={i} className="feedSection">
+                                <Feed
+                                    user={item.user}
+                                    image={item.imageUrl}
+                                    commentContent={item.text}
+                                    id={item.id}
+                                />
+                            </div>
+                        ))}
+                    </InfiniteScroll> */}
                 </div>
             </div>
         </div>

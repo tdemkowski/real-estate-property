@@ -66,7 +66,6 @@ const Homepage = (props: Props) => {
     }
 
     const loadItems = () => {
-        // make loading bar appear here before we start fetching requests
         setTimeout(() => {
             axios
                 .get(`${apiUrl}p?take=3&skip=${skip}`, {
@@ -77,7 +76,6 @@ const Homepage = (props: Props) => {
                 .then((res) => {
                     setPosts([...posts, ...res.data.response.items])
                     setSkip(skip + NUMBER_OF_ITEMS_PER_PAGE)
-                    // make loading bar disappear here once we load all the shit ah
                 })
         }, 1000)
     }
