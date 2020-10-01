@@ -21,7 +21,7 @@ class AuthController {
 
     private SignIn = async (req: Request, res: Response, next: NextFunction) => {
         const { username, password, email } = req.body
-        const user = await this.userService.FindOne({ where: [{ username }, { email }], select: ['password', 'email', 'id'] })
+        const user = await this.userService.FindOne({ where: [{ username }, { email }], select: ['password', 'email', 'id', 'username', 'fullName'] })
         if (user) {
             const passwordMatch = await bcrypt.compare(password, user.password)
             if (passwordMatch) {
@@ -29,6 +29,8 @@ class AuthController {
                     {
                         email: user.email,
                         userId: user.id,
+                        username: user.username,
+                        fullname: user.fullName
                     },
                     'superdupersecretsecret',
                     { expiresIn: '24h' },

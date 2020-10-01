@@ -68,9 +68,9 @@ const SignIn = (props: Props) => {
             Axios.post(`${apiUrl}auth/signin`, body)
                 .then((res) => {
                     console.warn(res)
-                    const { email, userId, exp } = JSON.parse(atob(res.data.token.split('.')[1]))
+                    const { email, userId, exp, username, fullName } = JSON.parse(atob(res.data.token.split('.')[1]))
                     window.localStorage.setItem('token', res.data.token)
-                    props.setCurrentUser({ email, userId, exp })
+                    props.setCurrentUser({ email, userId, exp, username, fullName })
                     setBorderSuccessStyle({ borderColor: '#dbdbdb' })
                     setRedirect(true)
                 })

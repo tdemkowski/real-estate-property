@@ -25,9 +25,9 @@ class App extends React.Component<Props> {
     componentDidMount() {
         const fetchToken = localStorage.getItem('token')
         if (fetchToken) {
-           const { email, userId, exp } = JSON.parse(atob(fetchToken.split('.')[1]))
+           const { email, userId, exp, username, fullName } = JSON.parse(atob(fetchToken.split('.')[1]))
            if (new Date().getTime() < exp * 1000) {
-             this.props.setCurrentUser({email, userId, exp})
+             this.props.setCurrentUser({email, userId, exp, username, fullName})
            } else {
                localStorage.setItem('token', '')
            }
@@ -59,7 +59,7 @@ class App extends React.Component<Props> {
 
                     {/* <Route exact path="/:username" component={Profile}></Route> */}
 
-                    <Route exact path="/:username" component={(routerProps: { match: { params: { username: any } } }) => <Profile username={routerProps.match.params.username} />}></Route>
+                    <Route exact path="/u/:username" component={(routerProps: { match: { params: { username: any } } }) => <Profile username={routerProps.match.params.username} />}></Route>
 
                     <Route exact path="/p/:postId" component={(routerProps: { match: { params: { postId: any } } }) => <Post postId={routerProps.match.params.postId} />}></Route>
 

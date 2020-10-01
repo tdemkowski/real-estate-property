@@ -2,7 +2,7 @@ export interface IUser {
     email: string
     userId: string
     exp: number
-    username?: string
+    username: string
     fullName?: string
     imageUrl?: string
 }
