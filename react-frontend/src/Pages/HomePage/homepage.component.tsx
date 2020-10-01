@@ -82,12 +82,24 @@ const Homepage = (props: Props) => {
 
     const loader = () => {
         return (
-            <div className="loader">
+            <div key={0} className="loader">
                 <LoadingOutlined style={{ fontSize: '3rem', color: '#dbdbdb' }} />
             </div>
         )
     }
 
+    const cardItems = posts.map((item, i) => (
+        <div key={item.id} className="feedSection">
+            <Feed
+                user={item.user}
+                image={item.imageUrl}
+                commentContent={item.text}
+                id={item.id}
+                path={path.pathname}
+            />
+        </div>
+    ))
+    
     return (
         <div className="HomePageComponent">
             <div className="HomePageMain">
@@ -96,17 +108,7 @@ const Homepage = (props: Props) => {
                 </div>
                 
                 <InfiniteScroll pageStart={0} loadMore={loadItems} hasMore={hasMore} loader={loader()}>
-                    {posts.map((item, i) => (
-                        <div key={i} className="feedSection">
-                            <Feed
-                                user={item.user}
-                                image={item.imageUrl}
-                                commentContent={item.text}
-                                id={item.id}
-                                path={path.pathname}
-                            />
-                        </div>
-                    ))}
+                    {cardItems}
                 </InfiniteScroll>
             </div>
             {user ? (
