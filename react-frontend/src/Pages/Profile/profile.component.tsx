@@ -44,7 +44,7 @@ const Profile = (props: any) => {
         document.title = props.username
 
         axios
-            .get(`${apiUrl}u/${props.username}`, {
+            .get(`${apiUrl}user/${props.username}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
