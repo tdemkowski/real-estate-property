@@ -5,10 +5,12 @@ import savedIcon from '../../../Assets/saved.svg'
 import settingsIcon from '../../../Assets/settings.svg'
 
 import './user.styles.scss'
+import { connect } from 'react-redux'
+import { StoreState } from '../../../redux/root-reducer'
 
 const ProfileDropdown = (props: any) => {
-    const profile = props.profile
-    const saved = props.profile + '/saved/'
+    const profile = props.username
+    const saved = props.username + '/saved/'
     const settings = 'accounts/edit/'
 
     return (
@@ -33,4 +35,8 @@ const ProfileDropdown = (props: any) => {
     )
 }
 
-export default ProfileDropdown
+const mapStateToProps = (state: StoreState) => ({
+    user: state.user,
+})
+
+export default connect(mapStateToProps, null)(ProfileDropdown)

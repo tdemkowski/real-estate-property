@@ -11,7 +11,7 @@ import userFilled from '../../Assets/userFilled.svg'
 import camera from '../../Assets/camera.svg'
 import search from '../../Assets/search.svg'
 import spinner from '../../Assets/spinner.svg'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Menu, Dropdown, message, Avatar } from 'antd'
 import { SettingTwoTone, HeartTwoTone, UserOutlined } from '@ant-design/icons'
 import { deleteCurrentUser } from '../../redux/user/user.action'
@@ -20,6 +20,7 @@ import BaseAction from '../../redux/base-action.model'
 import UserActionTypes from '../../redux/user/user.types'
 import { Button } from 'antd'
 import { UserState } from '../../redux/user/user.models'
+import { StoreState } from '../../redux/root-reducer'
 
 enum MenuActions {
     goToProfile,
@@ -39,7 +40,9 @@ const NavBar = (props: Props) => {
     const [profileDropdown, setProfileDropdown] = useState(false)
 
     const path = useLocation().pathname
+
     const noTextDecoration = { textDecoration: 'none' }
+    const history = useHistory();
 
     const searchTrigger = () => {
         setSearching(true)
@@ -61,6 +64,9 @@ const NavBar = (props: Props) => {
             message.error('LOGOUT')
             localStorage.setItem('token', '');
             props.deleteCurrentUser()
+        } else if (+e.key === MenuActions.goToProfile) {
+            const url = '/u/' + props.user.currentUser?.username
+            history.push(url) 
         }
     }
 
@@ -150,7 +156,7 @@ const NavBar = (props: Props) => {
     )
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: StoreState) => ({
     user: state.user,
 })
 
