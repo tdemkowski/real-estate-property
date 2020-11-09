@@ -4,7 +4,7 @@ export interface IUser {
     exp: number
     username: string
     fullName?: string
-    imageUrl?: string
+    profilePictureURL?: string
 }
 
 export interface UserState {

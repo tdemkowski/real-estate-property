@@ -9,6 +9,9 @@ import { UserOutlined } from '@ant-design/icons'
 import './feed.styles.scss'
 import { useLocation } from 'react-router-dom'
 
+import { Input } from 'antd';
+const { TextArea } = Input;
+
 enum FeedActions {
     post,
     copy,
@@ -100,7 +103,7 @@ const Feed = (props: any) => {
                 <div className="line-separation"></div>
                 
                 <form className="Add-a-comment">
-                    <textarea className="comment-input" placeholder="Add a comment..." />
+                    <TextArea placeholder="Add a comment..." autoSize />
                     <button className="comment-post">Post</button>
                 </form>
             </div>

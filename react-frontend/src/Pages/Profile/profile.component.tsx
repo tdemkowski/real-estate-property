@@ -5,14 +5,14 @@ import settingsIcon from '../../Assets/settings.svg'
 import axios from 'axios'
 import apiUrl from '../../config'
 import profPic1 from '../HomePage/RemoveLater/profPic1.png'
-import { connect } from 'react-redux'
-import { deleteCurrentUser } from '../../redux/user/user.action'
+// import { connect } from 'react-redux'
+// import { deleteCurrentUser } from '../../redux/user/user.action'
 import { IUser, UserState } from '../../redux/user/user.models'
-import InfiniteScroll from 'react-infinite-scroller'
-import Feed from '../../Components/Feed/feed.component'
-import { LoadingOutlined } from '@ant-design/icons'
+// import InfiniteScroll from 'react-infinite-scroller'
+// import Feed from '../../Components/Feed/feed.component'
+// import { LoadingOutlined } from '@ant-design/icons'
 
-const NUMBER_OF_ITEMS_PER_PAGE = 9
+// const NUMBER_OF_ITEMS_PER_PAGE = 9
 
 interface Post {
     imageUrl: string
@@ -33,11 +33,11 @@ interface tempUser {
 }
 
 const Profile = (props: any) => {
-    const [posts, setPosts] = useState<Post[]>([])
-    const [skip, setSkip] = useState(0)
-    const [postsLoaded, setPostsLoaded] = useState(0)
-    const [hasMore, setHasMore] = useState(true)
-    const [arr, setArr] = useState<string[]>([])
+    // const [posts, setPosts] = useState<Post[]>([])
+    // const [skip, setSkip] = useState(0)
+    // const [postsLoaded, setPostsLoaded] = useState(0)
+    // const [hasMore, setHasMore] = useState(true)
+    // const [arr, setArr] = useState<string[]>([])
     const [userData, setUserData] = useState<tempUser>()
 
     useEffect(() => {
@@ -56,31 +56,31 @@ const Profile = (props: any) => {
             .catch((err) => console.log(err))
     })
 
-    const loadItems = () => {
-        setTimeout(() => {
-            axios
-                .get(`${apiUrl}p?take=3&skip=${skip}`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                })
-                .then((res) => {
-                    setPosts([...posts, ...res.data.response.items])
-                    setSkip(skip + NUMBER_OF_ITEMS_PER_PAGE)
-                    setPostsLoaded(postsLoaded + 3)
-                    setHasMore(false)
-                    if (postsLoaded >= res.data.total) setHasMore(false)
-                })
-        }, 1000)
-    }
+    // const loadItems = () => {
+    //     setTimeout(() => {
+    //         axios
+    //             .get(`${apiUrl}p?take=3&skip=${skip}`, {
+    //                 headers: {
+    //                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //                 },
+    //             })
+    //             .then((res) => {
+    //                 setPosts([...posts, ...res.data.response.items])
+    //                 setSkip(skip + NUMBER_OF_ITEMS_PER_PAGE)
+    //                 setPostsLoaded(postsLoaded + 3)
+    //                 setHasMore(false)
+    //                 if (postsLoaded >= res.data.total) setHasMore(false)
+    //             })
+    //     }, 1000)
+    // }
 
-    const loader = () => {
-        return (
-            <div className="loader">
-                <LoadingOutlined style={{ fontSize: '3rem', color: '#dbdbdb' }} />
-            </div>
-        )
-    }
+    // const loader = () => {
+    //     return (
+    //         <div className="loader">
+    //             <LoadingOutlined style={{ fontSize: '3rem', color: '#dbdbdb' }} />
+    //         </div>
+    //     )
+    // }
 
     const loadHeader = () => {
         return (

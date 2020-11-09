@@ -34,12 +34,11 @@ const Homepage = (props: Props) => {
     const path = useLocation()
 
     useEffect(() => {
-        document.title = 'Instagram'
         if (props.user.currentUser) {
             loadUserInfo()
             loadRecommended()
         }
-    }, [1])
+    }, [props.user.currentUser])
 
     const loadUserInfo = () => {
         axios
@@ -116,7 +115,7 @@ const Homepage = (props: Props) => {
                     <UserComponent
                         username={user.username}
                         fullName={user.fullName}
-                        profilePictureUrl={user.imageUrl}
+                        profilePictureUrl={user.profilePictureURL}
                         mainUser="true"
                     />
                     <Suggestion fetchedUsers={recommended} />

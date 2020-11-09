@@ -25,10 +25,12 @@
     }
     
     .Add-a-comment {
-        width: 90%;
-        min-height: 4rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding-left: 16px;
+        padding-right: 16px;
+        min-height: 56px;
     }
     
     .icons {
@@ -49,6 +51,8 @@
         overflow: hidden;
         text-align-last: left;
         font-family: sans-serif;
+        height: 18px;
+        resize: none;
     }
     
     .comment-post {
@@ -58,6 +62,7 @@
         font-weight: bold;
         font-size: 1rem;
         outline: none;
+        cursor: pointer;
     }
 
     .comment-post:hover {
